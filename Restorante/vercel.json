@@ -1,11 +1,11 @@
 {
     "rewrites": [
         {
-            "source": "/restorante",
+            "source": "/",
             "destination": "/index.html"
         },
         {
-            "source": "/restorante/sobre",
+            "source": "/sobre",
             "destination": "/sobre.html"
         }
     ],
