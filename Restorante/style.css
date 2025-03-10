@@ -125,7 +125,7 @@ p {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 .card img {
-  width: 18rem;
+  width: 100%;
   height: auto;
   aspect-ratio: 16/16;
   object-fit: cover;
@@ -284,7 +284,7 @@ footer {
     margin-top: 25%;
   }
   .card img {
-    width: 15rem;
+    width: 100%;
   }
   .overlay {
     width: 80%;
