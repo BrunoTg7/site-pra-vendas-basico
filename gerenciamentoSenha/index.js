@@ -63,26 +63,11 @@ document.getElementById("addInputsBtn").addEventListener("click", () => {
 
 // Função para manipular dados no Excel
 async function manipularExcelCompartilhado(sharedLink, dados) {
-  const tenantId = "f8cdef31-a31e-4b4a-93e4-5f571e91255a";
-  const clientId = "c8aa8d75-1943-4d45-b737-b5f9952f8701";
-  const clientSecret = "Yvo8Q~ndJ9MulQ5z3CQm6grgqnOsYhWGhG.8Xday";
-
   try {
-    // Obter o Token de Acesso
-    const tokenResponse = await fetch(
-      `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          grant_type: "client_credentials",
-          client_id: clientId,
-          client_secret: clientSecret,
-          scope: "https://graph.microsoft.com/.default",
-        }),
-      }
-    );
+    // Obter o Token de Acesso através da função serverless
+    const tokenResponse = await fetch("/api/get-token", { method: "GET" });
 
+    // Verificar se a resposta é válida
     if (!tokenResponse.ok) {
       const errorText = await tokenResponse.text();
       throw new Error(
@@ -91,18 +76,21 @@ async function manipularExcelCompartilhado(sharedLink, dados) {
     }
 
     const tokenData = await tokenResponse.json();
-    const token = tokenData.access_token;
+    const token = tokenData.access_token; // Captura o token de acesso
 
-    // Converter o link compartilhado em shareId
+    console.log("Token recebido:", token);
+
+    // Converter o link compartilhado em shareId (Base64)
     const shareId = `u!${btoa(sharedLink)}`;
     const fileResponse = await fetch(
       `https://graph.microsoft.com/v1.0/shares/${shareId}/driveItem`,
       {
         method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` }, // Passa o token no cabeçalho
       }
     );
 
+    // Verificar se foi possível obter o ID do arquivo
     if (!fileResponse.ok) {
       const errorText = await fileResponse.text();
       throw new Error(
@@ -111,21 +99,23 @@ async function manipularExcelCompartilhado(sharedLink, dados) {
     }
 
     const fileData = await fileResponse.json();
-    const fileId = fileData.id;
+    const fileId = fileData.id; // Extrai o ID do arquivo
+    console.log("ID do arquivo:", fileId);
 
-    // Salvar os dados no Excel
+    // Atualizar os dados no Excel
     const excelResponse = await fetch(
       `https://graph.microsoft.com/v1.0/me/drive/items/${fileId}/workbook/worksheets('Sheet1')/range(address='A1')`,
       {
         method: "PATCH",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Passa o token
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ values: dados }),
+        body: JSON.stringify({ values: dados }), // Dados para atualizar na planilha
       }
     );
 
+    // Verificar se os dados foram salvos corretamente
     if (!excelResponse.ok) {
       const errorText = await excelResponse.text();
       throw new Error(
@@ -133,9 +123,9 @@ async function manipularExcelCompartilhado(sharedLink, dados) {
       );
     }
 
-    console.log("Dados salvos com sucesso.");
+    console.log("Dados salvos com sucesso no Excel.");
   } catch (error) {
-    console.error("Erro:", error.message);
+    console.error("Erro:", error.message); // Captura e exibe o erro no console
   }
 }
 
