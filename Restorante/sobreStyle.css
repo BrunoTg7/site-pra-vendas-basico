@@ -143,18 +143,6 @@ p {
   flex-direction: column;
 }
 
-.galeria .card {
-  max-width: 266px;
-  max-height: 266px;
-  background-color: rgb(236, 232, 225);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-.galeria .card:hover {
-  transform: translateY(-10px);
-}
-
 .card {
   margin: 20px 0;
   padding: 20px;

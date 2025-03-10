@@ -113,6 +113,8 @@ p {
   flex-wrap: wrap;
 }
 .card {
+  max-width: 266px;
+  max-height: 266px;
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px;
@@ -261,23 +263,22 @@ footer {
     margin-left: 1vw;
     margin-top: 76vh;
   }
-  
+
   .entrada .molde {
     width: 40vw;
     margin-left: 29.6vw;
     margin-top: 15vh;
-
   }
-  
+
   .header-content {
     margin-top: 45vh;
     height: 20px;
   }
-  
+
   .content {
     margin-top: 50px;
   }
-  
+
   .galeria {
     padding: 30px;
     margin-top: 25%;
@@ -346,23 +347,22 @@ footer {
     margin-left: 1vw;
     margin-top: 50vh;
   }
-  
+
   .entrada .molde {
     width: 40vw;
     margin-left: 29vw;
     margin-top: 15vh;
-
   }
-  
+
   .header-content {
     margin-top: 29.5vh;
     height: 20px;
   }
-  
+
   .content {
     margin-top: 2px;
   }
-  
+
   .galeria {
     padding: 10px;
     margin-top: 30%;
@@ -384,7 +384,7 @@ footer {
   .overlay h1 {
     font-size: 3vw;
   }
-  
+
   .overlay p {
     font-size: 2vw;
   }
@@ -430,19 +430,18 @@ footer {
     margin-left: 1vw;
     margin-top: 30vh;
   }
-  
+
   .entrada .molde {
     width: 40vw;
     margin-left: 29.6vw;
     margin-top: 10vh;
-
   }
-  
+
   .header-content {
     margin-top: 19vh;
     height: 20px;
   }
-  
+
   .content {
     margin-top: -5px;
   }
@@ -483,7 +482,7 @@ footer {
   .close-btn {
     top: 65px;
   }
-  
+
   .sobre-section {
     flex-direction: column;
     padding: 20px;

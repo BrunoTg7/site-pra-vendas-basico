@@ -69,6 +69,7 @@ function criarCard(fotos) {
   fotos.forEach((foto) => {
     const card = document.createElement("div");
     card.classList.add("card");
+    card.id = "cardGa";
     const img = document.createElement("img");
     img.src = foto.url;
     card.appendChild(img);
