@@ -144,6 +144,8 @@ p {
 }
 
 .card {
+  width: 266px;
+  height: 266px;
   margin: 20px 0;
   padding: 20px;
   background-color: rgb(236, 232, 225);
@@ -192,7 +194,7 @@ p {
   height: auto;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);;
+  transform: translate(-50%, -50%);
   position: absolute;
 }
 
@@ -308,7 +310,6 @@ footer {
 
   .entrada .molde {
     width: 40vw;
-
   }
   .entrada .logoEntrada {
     width: 28vw;
