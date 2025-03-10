@@ -113,8 +113,8 @@ p {
   flex-wrap: wrap;
 }
 .card {
-  max-width: 266px;
-  max-height: 266px;
+  max-width: 240px;
+  max-height: 240px;
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px;
@@ -282,9 +282,6 @@ footer {
   .galeria {
     padding: 30px;
     margin-top: 25%;
-  }
-  .card img {
-    width: 100%;
   }
   .overlay {
     width: 80%;
