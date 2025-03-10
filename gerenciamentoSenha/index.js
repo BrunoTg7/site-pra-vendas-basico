@@ -65,7 +65,7 @@ document.getElementById("addInputsBtn").addEventListener("click", () => {
 async function manipularExcelCompartilhado(sharedLink, dados) {
   try {
     // Obter o Token de Acesso através da função serverless
-    const tokenResponse = await fetch("/api/get-token", { method: "GET" });
+    const tokenResponse = await fetch("/api/get_token", { method: "GET" });
 
     // Verificar se a resposta é válida
     if (!tokenResponse.ok) {
