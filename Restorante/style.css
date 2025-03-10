@@ -113,8 +113,8 @@ p {
   flex-wrap: wrap;
 }
 .card {
-  max-width: 220px;
-  max-height: 220px;
+  width: 200px;
+  height: 200px;
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px;
