@@ -14,8 +14,15 @@ export default async function handler(req, res) {
       }
     );
 
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `Erro na autenticação: ${response.status} - ${errorText}`
+      );
+    }
+
     const data = await response.json();
-    res.status(200).json(data);
+    res.status(200).json(data); // Retorna o token
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
