@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Criar Senha / Salvar Dados</title>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div class="container">
+        <!-- Geração de Senhas -->
+        <div class="criaSenha">
+          <button type="button" id="gerar8">Gerar Senha com 8</button>
+          <button type="button" id="gerar12">Gerar Senha com 12</button>
+          <button type="button" id="gerar16">Gerar Senha com 16</button>
+
+          <div class="mostraSenha">
+            <span style="display: none"></span>
+          </div>
+        </div>
+
+        <!-- Campo de dados para Excel -->
+        <div class="tabuleiro">
+          <div class="excel">
+            <label for="sharedLink">Link do Excel Compartilhado:</label>
+            <input
+              type="text"
+              id="sharedLink"
+              placeholder="Insira o link compartilhado aqui"
+            />
+
+            <div id="inputsContainer">
+              <label for="emailUser0">Email/Usuário:</label>
+              <input type="text" id="emailUser0" />
+              <label for="Senha0">Senha:</label>
+              <input type="text" id="Senha0" />
+            </div>
+
+            <button id="addInputsBtn">Adicionar Mais Campos</button>
+            <button type="button" id="excelbtn">Salvar Dados</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="index.js"></script>
+  </body>
+</html>

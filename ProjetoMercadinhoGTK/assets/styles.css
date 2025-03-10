@@ -1,0 +1,116 @@
+/* ------------------------------------- */
+/* Janela e Layout Geral */
+window {
+  background-color: #454545; /* Fundo cinza escuro */
+  color: white;
+  font-family: Arial, sans-serif; /* Fonte padrão */
+}
+
+/* Estilo da Barra de Título */
+.titlebar {
+  background-color: transparent; /* Fundo transparente */
+}
+
+/* Centralização da Caixa Principal */
+.central-box {
+  margin: 50px auto; /* Centraliza e ajusta o espaçamento */
+  text-align: center; /* Centraliza o texto */
+  max-width: 800px; /* Largura do bloco principal */
+  max-height: 400px;
+  padding: 20px; /* Espaçamento interno */
+  background-color: rgba(255, 255, 255, 0.1); /* Fundo semi-transparente */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+}
+
+/* ------------------------------------- */
+/* Rótulos (Labels) */
+.central-box .username-label,
+.central-box .password-label {
+  font-size: 14px;
+  font-weight: bold; /* Texto em negrito */
+  color: #ffffff; /* Texto em branco */
+  margin-bottom: 5px; /* Espaçamento abaixo do rótulo */
+  display: block; /* Ocupa linha inteira */
+  text-align: left; /* Alinhamento à esquerda */
+}
+
+/* ------------------------------------- */
+/* Campos de Entrada */
+.central-box .username-entry,
+.central-box .password-entry {
+  color: white; /* Texto branco */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Fundo transparente com opacidade */
+  font-size: 14px; /* Fonte */
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Borda com leve transparência */
+  border-radius: 10px; /* Cantos arredondados */
+  width: 400px; /* Largura fixa */
+  height: 40px; /* Altura fixa */
+  outline: none; /* Remove contorno padrão */
+  padding: 0 10px; /* Espaçamento interno */
+  margin: 10px auto; /* Espaçamento externo centralizado */
+  display: block; /* Ocupa uma linha separada */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  transition: all 0.3s ease; /* Transição suave */
+}
+
+.central-box .username-entry:hover,
+.central-box .password-entry:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Realce ao passar o mouse */
+  border-color: rgba(255, 255, 255, 0.8); /* Realce da borda */
+}
+
+.central-box .username-entry:focus,
+.central-box .password-entry:focus {
+  background-color: rgba(255, 255, 255, 0.3); /* Fundo mais claro ao focar */
+  border-color: white; /* Destaque da borda */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
+}
+
+/* ------------------------------------- */
+/* Botão de Login */
+.central-box .login_btn {
+  background-color: #28a745; /* Verde moderno */
+  color: white; /* Texto branco */
+  font-size: 14px;
+  font-weight: bold; /* Texto em negrito */
+  padding: 10px 20px; /* Espaço interno */
+  width: 50px; /* Largura fixa combinando com os campos */
+  border-radius: 10px; /* Bordas arredondadas */
+  border: none; /* Sem borda */
+  margin-top: 15px; /* Espaçamento superior */
+  transition: background-color 0.3s ease; /* Suaviza a transição ao passar o mouse */
+  cursor: pointer; /* Mostra que é clicável */
+}
+
+.central-box .login_btn:hover {
+  background-color: #218838; /* Verde mais escuro ao passar o mouse */
+}
+
+.central-box .login_btn:active {
+  background-color: #1e7e34; /* Verde ainda mais escuro ao clicar */
+}
+
+/* ------------------------------------- */
+/* Rótulo de Mensagens */
+.central-box .message-label {
+  font-size: 14px;
+  margin-top: 15px; /* Espaçamento acima do rótulo */
+  color: #ffffff; /* Texto branco */
+  text-align: center; /* Centraliza as mensagens */
+}
+
+/* Mensagens de Sucesso */
+.central-box .success-message {
+  color: #00ff00; /* Verde para mensagens de sucesso */
+}
+
+/* Mensagens de Erro */
+.central-box .error-message {
+  color: #ff0000; /* Vermelho para mensagens de erro */
+}
