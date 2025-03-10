@@ -69,15 +69,6 @@ function criarCard(fotos) {
   fotos.forEach((foto) => {
     const card = document.createElement("div");
     card.classList.add("card");
-    card.style.cssText = `max-width: 240px;
-  max-height: 240px;
-  margin: 20px 0;
-  padding: 20px;
-  background-color: rgb(236, 232, 225);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;`;
-
     const img = document.createElement("img");
     img.src = foto.url;
     card.appendChild(img);
