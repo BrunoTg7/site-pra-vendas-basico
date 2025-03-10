@@ -1,12 +1,12 @@
 {
     "rewrites": [
         {
-            "source": "/",
-            "destination": "/index.html"
+            "source": "/restorante",
+            "destination": "./index.html"
         },
         {
-            "source": "/sobre",
-            "destination": "/sobre.html"
+            "source": "/restorante/sobre",
+            "destination": "./sobre.html"
         }
     ],
     "cleanUrls": true
