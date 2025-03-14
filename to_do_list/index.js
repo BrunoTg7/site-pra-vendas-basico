@@ -30,7 +30,7 @@ function loginSalvo() {
   let login;
   try {
     login = JSON.parse(atob(localStorage.getItem("5s51d2a30as5f"))) || {};
-  } catch (e) {
+  } catch {
     console.error("Erro ao decodificar os dados do login:", e);
     login = {};
   }
@@ -162,7 +162,7 @@ const tarefa = () => {
       try {
         storage =
           JSON.parse(atob(localStorage.getItem("gjs5s4c1a24ss4d"))) || {};
-      } catch (e) {
+      } catch {
         console.error("Erro ao carregar as tarefas salvas:", e);
       }
 
@@ -317,7 +317,7 @@ function removerData(date) {
   let storage = {};
   try {
     storage = JSON.parse(atob(localStorage.getItem("gjs5s4c1a24ss4d"))) || {};
-  } catch (e) {
+  } catch {
     console.error("Erro ao carregar as tarefas:", e);
   }
 
