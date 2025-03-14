@@ -243,3 +243,18 @@ img:active {
   background-color: #92000f; /* Cor mais intensa ao clicar */
   transform: scale(0.95); /* Diminui ligeiramente ao pressionar */
 }
+
+h1 {
+  font-family: "Arial", sans-serif; /* Define a fonte */
+  font-size: 36px; /* Tamanho da fonte */
+  color: #4caf50; /* Cor do texto */
+  text-align: center; /* Centraliza o texto */
+  text-transform: uppercase; /* Deixa o texto em maiúsculas */
+  margin-top: 20px; /* Espaço superior */
+  margin-bottom: 20px; /* Espaço inferior */
+  letter-spacing: 2px; /* Espaçamento entre letras */
+  background-color: #f0f0f0; /* Cor de fundo */
+  padding: 10px; /* Espaçamento interno */
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
