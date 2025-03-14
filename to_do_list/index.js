@@ -88,7 +88,6 @@ function cadastroSalvo() {
     senha: senha,
     email: email,
   };
-
   localStorage.setItem("5s51d2a30as5f", btoa(JSON.stringify(cadastro)));
   alert("Cadastro realizado com sucesso!");
   document.querySelector(".cadastro").style.display = "none";
