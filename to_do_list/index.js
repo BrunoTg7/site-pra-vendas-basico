@@ -7,6 +7,21 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("logar").addEventListener("click", loginSalvo);
 });
 
+// Função para realizar o cadastro
+function cadastroSalvo() {
+  const senha = document.getElementById("senha1").value;
+  const email = document.getElementById("email1").value;
+
+  const cadastro = {
+    senha: senha,
+    email: email,
+  };
+  localStorage.setItem("5s51d2a30as5f", btoa(JSON.stringify(cadastro)));
+  alert("Cadastro realizado com sucesso!");
+  document.querySelector(".cadastro").style.display = "none";
+  document.querySelector(".login").style.display = "none";
+  verificarTempoDeSessao();
+}
 // Função para realizar login
 function loginSalvo() {
   const senha = document.getElementById("senha").value;
@@ -27,7 +42,6 @@ function loginSalvo() {
     alert("Login realizado com sucesso!");
     document.querySelector(".login").style.display = "none";
     document.querySelector(".cadastro").style.display = "none";
-    tarefa();
     verificarTempoDeSessao();
   } else {
     alert("Credenciais inválidas. Tente novamente.");
@@ -77,23 +91,6 @@ function deslogarUsuario() {
   document.querySelector(".login").style.display = "flex";
   document.querySelector(".cadastro").style.display = "flex";
   document.querySelector(".tarefa").style.display = "none";
-}
-
-// Função para realizar o cadastro
-function cadastroSalvo() {
-  const senha = document.getElementById("senha1").value;
-  const email = document.getElementById("email1").value;
-
-  const cadastro = {
-    senha: senha,
-    email: email,
-  };
-  localStorage.setItem("5s51d2a30as5f", btoa(JSON.stringify(cadastro)));
-  alert("Cadastro realizado com sucesso!");
-  document.querySelector(".cadastro").style.display = "none";
-  document.querySelector(".login").style.display = "none";
-  tarefa();
-  verificarTempoDeSessao();
 }
 
 const tarefa = () => {
