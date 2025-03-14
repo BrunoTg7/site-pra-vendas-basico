@@ -245,16 +245,20 @@ img:active {
 }
 
 h1 {
-  font-family: "Arial", sans-serif; /* Define a fonte */
-  font-size: 36px; /* Tamanho da fonte */
-  color: #4caf50; /* Cor do texto */
-  text-align: center; /* Centraliza o texto */
-  text-transform: uppercase; /* Deixa o texto em maiúsculas */
-  margin-top: 20px; /* Espaço superior */
-  margin-bottom: 20px; /* Espaço inferior */
-  letter-spacing: 2px; /* Espaçamento entre letras */
-  background-color: #f0f0f0; /* Cor de fundo */
-  padding: 10px; /* Espaçamento interno */
-  border-radius: 8px; /* Bordas arredondadas */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  font-family: "Arial", sans-serif;
+  font-size: 36px;
+  color: #4caf50;
+  text-align: center; /* Centraliza horizontalmente */
+  text-transform: uppercase;
+  margin: 0; /* Remove margens padrão */
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: absolute; /* Faz com que o elemento seja posicionado de forma absoluta */
+  top: 4%; /* Posiciona no topo */
+  left: 50%; /* Centraliza horizontalmente com base na largura da tela */
+  transform: translateX(-50%); /* Ajusta para realmente ficar centralizado */
+  width: 100%; /* Faz o elemento ocupar toda a largura */
+  max-width: 600px; /* Define um limite para o tamanho máximo */
 }
