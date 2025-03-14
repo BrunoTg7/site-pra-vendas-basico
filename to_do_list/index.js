@@ -220,10 +220,16 @@ function atualizarLista() {
   toDoList.innerHTML = ""; // Limpa a área de botões de datas
 
   let storage = {};
-  try {
-    storage = JSON.parse(atob(localStorage.getItem("gjs5s4c1a24ss4d"))) || {};
-  } catch (e) {
-    console.error("Erro ao carregar as tarefas:", e);
+  const rawData = localStorage.getItem("gjs5s4c1a24ss4d");
+
+  if (rawData) {
+    try {
+      storage = JSON.parse(atob(rawData)) || {};
+    } catch {
+      console.error(
+        "Erro ao carregar as tarefas. Verifique o conteúdo do armazenamento local."
+      );
+    }
   }
 
   // Cria botões para cada dia/mês
