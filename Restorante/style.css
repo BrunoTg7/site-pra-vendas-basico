@@ -1,0 +1,502 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: var(--font-display);
+}
+html {
+  text-size-adjust: 100%;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: bisque;
+  width: auto;
+  overflow-x: hidden;
+}
+
+header {
+  background-color: #373636;
+  color: white;
+  width: 100%;
+  height: 70px;
+  flex-direction: row-reverse;
+  position: fixed;
+  z-index: 500;
+}
+.logo {
+  float: left;
+  margin-top: -6px;
+  margin-left: 50px;
+  width: 80px;
+  height: 80px;
+}
+.logo a img {
+  color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.instagram {
+  float: right;
+  margin-top: -2px;
+  margin-right: 50px;
+}
+
+.instagram a img {
+  color: white;
+  font-size: 1.5em;
+  width: 75px;
+  height: auto;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+  position: relative;
+  padding-top: 20px;
+}
+.entrada .flor {
+  width: 10vw;
+  height: auto;
+  margin-left: 90vw;
+  margin-top: 6vh;
+  display: flex;
+  position: absolute;
+}
+.entrada .flor2 {
+  width: 10vw;
+  height: auto;
+  margin-left: 1vw;
+  margin-top: 76vh;
+  display: flex;
+  position: absolute;
+}
+
+.entrada .molde {
+  width: 40vw;
+  height: auto;
+  margin-left: 29.8vw;
+  margin-top: 5vh;
+  display: flex;
+  position: absolute;
+}
+
+.header-content {
+  display: flex;
+  justify-content: center;
+  margin-top: 45vh;
+  height: 20px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2vw; /* Tamanho do texto proporcional à largura da tela */
+}
+
+p {
+  margin-top: 10px;
+  font-size: 1.2vw; /* Tamanho do texto proporcional à largura da tela */
+}
+
+.galeria {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  padding: 6rem;
+  margin-top: 25%;
+  flex-wrap: wrap;
+}
+.card {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  background-color: antiquewhite;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/16;
+  object-fit: cover;
+}
+.overlay {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 0;
+  z-index: 450;
+  justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  max-height: 500px;
+  margin-left: calc(50% - 450px);
+  margin-top: 6.5%;
+}
+.overlay .content {
+  background-color: rgb(213, 187, 151);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 600px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.overlay img {
+  width: 500px;
+  height: 100%;
+  object-fit: cover;
+}
+.painel {
+  margin-left: 30px;
+  width: calc(100% - 480px);
+  height: 100%;
+  overflow-y: auto;
+  word-wrap: break-word;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: antiquewhite;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.sobre-section {
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  padding: 50px;
+  text-align: left;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 50px auto;
+  width: 100%;
+  color: antiquewhite;
+}
+.sobre-img {
+  width: 20%;
+  margin-right: 180px;
+  margin-left: 140px;
+}
+.sobre-text {
+  max-width: 60%;
+}
+.sobre-text h2 {
+  margin-bottom: 20px;
+  font-size: 2em;
+}
+.sobre-text p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+.btn-sobre {
+  background-color: antiquewhite;
+  color: #333;
+  padding: 15px 30px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+.btn-sobre:hover {
+  background-color: #555;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 5%;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: wheat;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: whitesmoke;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 1200px) {
+  .entrada .flor {
+    width: 10vw;
+    margin-left: 90vw;
+    margin-top: 6vh;
+  }
+  .entrada .flor2 {
+    width: 10vw;
+    margin-left: 1vw;
+    margin-top: 76vh;
+  }
+
+  .entrada .molde {
+    width: 40vw;
+    margin-left: 29.6vw;
+    margin-top: 15vh;
+  }
+
+  .header-content {
+    margin-top: 45vh;
+    height: 20px;
+  }
+
+  .content {
+    margin-top: 50px;
+  }
+
+  .galeria {
+    padding: 30px;
+    margin-top: 25%;
+  }
+  .overlay {
+    width: 80%;
+    height: auto;
+    margin-left: 10%;
+    margin-top: 22%;
+    padding-bottom: 25%;
+  }
+  .overlay img {
+    width: 70%;
+  }
+  .painel {
+    width: calc(100% - 350px);
+  }
+  .close-btn {
+    top: -80px;
+  }
+
+  .sobre-section {
+    flex-direction: column;
+    align-items: center;
+  }
+  .sobre-img {
+    width: 50%;
+    margin: 0 auto 20px;
+  }
+  .sobre-text {
+    max-width: 100%;
+    text-align: center;
+  }
+  .sobre-text h2 {
+    font-size: 1.5em;
+  }
+  .btn-sobre {
+    width: 100%;
+    text-align: center;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    height: 60px;
+  }
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+  .instagram a img {
+    width: 60px;
+  }
+
+  .entrada .flor {
+    width: 10vw;
+    margin-left: 90vw;
+    margin-top: 6vh;
+  }
+  .entrada .flor2 {
+    width: 10vw;
+    margin-left: 1vw;
+    margin-top: 50vh;
+  }
+
+  .entrada .molde {
+    width: 40vw;
+    margin-left: 29vw;
+    margin-top: 15vh;
+  }
+
+  .header-content {
+    margin-top: 29.5vh;
+    height: 20px;
+  }
+
+  .content {
+    margin-top: 2px;
+  }
+
+  .galeria {
+    padding: 10px;
+    margin-top: 30%;
+  }
+  .card img {
+    width: 180px;
+    height: 180px;
+  }
+  .overlay {
+    margin-top: 33%;
+    padding-bottom: 20%;
+  }
+  .overlay img {
+    width: 60%;
+  }
+  .painel {
+    width: calc(100% - 250px);
+  }
+  .overlay h1 {
+    font-size: 3vw;
+  }
+
+  .overlay p {
+    font-size: 2vw;
+  }
+  .close-btn {
+    top: -85px;
+  }
+
+  .sobre-section {
+    padding: 30px;
+  }
+  .sobre-img {
+    width: 60%;
+    margin: 0 auto 15px;
+  }
+  .sobre-text h2 {
+    font-size: 1.3em;
+  }
+  .btn-sobre {
+    width: 100%;
+    padding: 8px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    height: 50px;
+  }
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+  .instagram a img {
+    width: 50px;
+  }
+
+  .entrada .flor {
+    width: 10vw;
+    margin-left: 90vw;
+    margin-top: 6vh;
+  }
+  .entrada .flor2 {
+    width: 10vw;
+    margin-left: 1vw;
+    margin-top: 30vh;
+  }
+
+  .entrada .molde {
+    width: 40vw;
+    margin-left: 29.6vw;
+    margin-top: 10vh;
+  }
+
+  .header-content {
+    margin-top: 19vh;
+    height: 20px;
+  }
+
+  .content {
+    margin-top: -5px;
+  }
+
+  .galeria {
+    padding: 10px;
+    margin-top: 28%;
+  }
+  .card img {
+    width: 150px;
+    height: 150px;
+  }
+  .overlay {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 15%;
+    padding-bottom: 10%;
+  }
+  .overlay .content {
+    width: 400px;
+    height: 400px;
+  }
+  .overlay img {
+    width: 40%;
+  }
+  .painel {
+    width: calc(100% - 100px);
+    height: 100%;
+    overflow-y: auto;
+    word-wrap: break-word;
+  }
+  h1 {
+    font-size: 3vw;
+  }
+  p {
+    font-size: 2vw;
+  }
+  .close-btn {
+    top: 65px;
+  }
+
+  .sobre-section {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .sobre-img {
+    width: 70%;
+    margin: 0 auto 10px;
+  }
+  .sobre-text {
+    max-width: 100%;
+    text-align: center;
+  }
+  .sobre-text h2 {
+    font-size: 1.2em;
+  }
+  .btn-sobre {
+    width: 100%;
+    padding: 8px 15px;
+  }
+}

@@ -1,0 +1,264 @@
+/* Estilização geral */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+/* Centraliza tudo no corpo */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container principal */
+.container {
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Login e Cadastro */
+.login,
+.cadastro {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.login label,
+.cadastro label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.login input,
+.cadastro input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.login button,
+.cadastro button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login button:hover,
+.cadastro button:hover {
+  background-color: #45a049;
+}
+
+/* Tarefas */
+.tarefa {
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+/* Botão de Adicionar Tarefa */
+#gerarList {
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#gerarList:hover {
+  background-color: #0056b3;
+}
+
+/* To-Do List */
+.toDoList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toDoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.toDoItem span {
+  flex: 1;
+  margin: 0 10px;
+  font-size: 14px;
+}
+
+.toDoItem input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.toDoItem button {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #ff4c4c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.toDoItem button:hover {
+  background-color: #d93636;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.lista input[type="text"] {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.lista input[type="text"]:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.lista button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.lista button:hover {
+  background-color: #0056b3;
+}
+
+#sair {
+  top: 20px;
+  right: 50px;
+  position: absolute;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#sair:hover {
+  transform: scale(1.1);
+}
+
+img {
+  top: 20px;
+  right: 50px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: transparent;
+}
+
+img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+img:active {
+  transform: scale(0.95);
+}
+
+.dateButton {
+  margin: 5px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dateButton:hover {
+  background-color: #0056b3;
+}
+
+.dateButton[style*="display: none"] {
+  visibility: hidden; /* Oculta o botão completamente */
+}
+
+#limparLista {
+  margin: 10px 0; /* Espaçamento externo */
+  padding: 10px 20px; /* Espaçamento interno */
+  font-size: 16px; /* Tamanho da fonte */
+  color: #ffffff; /* Cor do texto */
+  background-color: #ff0019; /* Vermelho para destacar o botão */
+  border: none; /* Sem bordas */
+  border-radius: 5px; /* Bordas arredondadas */
+  cursor: pointer; /* Mostra o cursor de mão ao passar o mouse */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Suavidade */
+}
+
+#limparLista:hover {
+  background-color: #af0011; /* Vermelho mais escuro ao passar o mouse */
+  transform: scale(1.05); /* Aumenta ligeiramente o tamanho */
+}
+
+#limparLista:active {
+  background-color: #92000f; /* Cor mais intensa ao clicar */
+  transform: scale(0.95); /* Diminui ligeiramente ao pressionar */
+}
+
+h1 {
+  font-family: "Arial", sans-serif;
+  font-size: 36px;
+  color: #4caf50;
+  text-align: center; /* Centraliza horizontalmente */
+  text-transform: uppercase;
+  margin: 0; /* Remove margens padrão */
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: absolute; /* Faz com que o elemento seja posicionado de forma absoluta */
+  top: 4%; /* Posiciona no topo */
+  left: 50%; /* Centraliza horizontalmente com base na largura da tela */
+  transform: translateX(-50%); /* Ajusta para realmente ficar centralizado */
+  width: 100%; /* Faz o elemento ocupar toda a largura */
+  max-width: 600px; /* Define um limite para o tamanho máximo */
+}

@@ -1,0 +1,13 @@
+{
+    "rewrites": [
+        {
+            "source": "/restorante",
+            "destination": "./index.html"
+        },
+        {
+            "source": "/restorante/sobre",
+            "destination": "./sobre.html"
+        }
+    ],
+    "cleanUrls": true
+}
