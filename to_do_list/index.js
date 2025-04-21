@@ -111,13 +111,10 @@ const tarefa = () => {
 
     const idCounter = new Date().getTime(); // Gera IDs únicos baseados no timestamp
 
-    // Input para selecionar a data (dia/mês)
     const dateInput = document.createElement("input");
-    dateInput.type = "text";
-    dateInput.placeholder = "Digite o Dia/Mês (Ex: 01/01)";
+    dateInput.type = "date"; // Alterado para exibir um calendário
+    dateInput.placeholder = "Selecione a data";
     dateInput.id = `date-${idCounter}`;
-    dateInput.maxLength = 5; // Limita o máximo de caracteres a 5
-    dateInput.minLength = 5; // Limita o mínimo de caracteres a 5
 
     // Input para adicionar a tarefa
     const taskInput = document.createElement("input");
@@ -131,6 +128,17 @@ const tarefa = () => {
     saveButton.type = "button";
     saveButton.id = `save-${idCounter}`;
 
+    dateInput.addEventListener("change", () => {
+      const fullDate = new Date(dateInput.value);
+      const formattedDate = `${fullDate
+        .getDate()
+        .toString()
+        .padStart(2, "0")}/${(fullDate.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}`;
+
+      console.log("Data formatada:", formattedDate); // Exemplo: "21/04"
+    });
     saveButton.addEventListener("click", () => {
       const dateInput = document.getElementById(`date-${idCounter}`);
       const taskInput = document.getElementById(`task-${idCounter}`);
