@@ -22,7 +22,7 @@ function cadastroSalvo() {
   document.querySelector(".login").style.display = "none";
   verificarTempoDeSessao();
 }
-// Função para realizar login
+
 function loginSalvo() {
   const senha = document.getElementById("senha").value;
   const email = document.getElementById("email").value;
@@ -30,7 +30,7 @@ function loginSalvo() {
   let login;
   try {
     login = JSON.parse(atob(localStorage.getItem("5s51d2a30as5f"))) || {};
-  } catch (e) {
+  } catch {
     console.error("Erro ao decodificar os dados do login:", e);
     login = {};
   }
@@ -102,7 +102,6 @@ const tarefa = () => {
         <div class="lista" style="display: none"></div>
         <div class="toDoList"></div>
       `;
-
   // Evento para adicionar tarefa
   document.getElementById("gerarList").addEventListener("click", () => {
     const lista = document.querySelector(".lista");
@@ -150,28 +149,33 @@ const tarefa = () => {
         alert("Por favor, preencha a tarefa antes de salvar.");
         return;
       }
+      const loginData = localStorage.getItem("5s51d2a30as5f");
+      if (!loginData) {
+        alert("Erro: Usuário não encontrado!");
+        return;
+      }
 
-      // Dados a serem salvos
-      const dados = {
+      const login = JSON.parse(atob(loginData)) || {};
+
+      let storage =
+        JSON.parse(atob(localStorage.getItem("gjs5s4c1a24ss4d"))) || {};
+
+      // Garante que há um espaço para o usuário
+      if (!storage[login.email]) {
+        storage[login.email] = {};
+      }
+
+      // Garante que há um espaço para a data
+      if (!storage[login.email][dateValue]) {
+        storage[login.email][dateValue] = [];
+      }
+
+      storage[login.email][dateValue].push({
         lista: taskValue,
         selecao: false,
-        data: dateValue, // Salva o dia/mês associado à tarefa
-      };
+        data: dateValue,
+      });
 
-      let storage = {};
-      try {
-        storage =
-          JSON.parse(atob(localStorage.getItem("gjs5s4c1a24ss4d"))) || {};
-      } catch (e) {
-        console.error("Erro ao carregar as tarefas salvas:", e);
-      }
-
-      // Agrupa tarefas por dia/mês (Exemplo: "14/03")
-      if (!storage[dateValue]) {
-        storage[dateValue] = []; // Cria uma lista para a data se não existir
-      }
-
-      storage[dateValue].push(dados); // Adiciona a tarefa à data correspondente
       localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
 
       alert(`Tarefa salva para ${dateValue}: ${taskValue}`);
@@ -220,18 +224,31 @@ function atualizarLista() {
   toDoList.innerHTML = ""; // Limpa a área de botões de datas
 
   let storage = {};
-  const rawData = localStorage.getItem("gjs5s4c1a24ss4d");
+  const rawDataString = localStorage.getItem("gjs5s4c1a24ss4d");
+  const loginDataString = localStorage.getItem("5s51d2a30as5f");
 
-  if (rawData) {
+  if (rawDataString && loginDataString) {
     try {
-      storage = JSON.parse(atob(rawData)) || {};
-    } catch {
-      console.error(
-        "Erro ao carregar as tarefas. Verifique o conteúdo do armazenamento local."
-      );
-    }
-  }
+      const rawData = JSON.parse(atob(rawDataString)) || {};
+      const loginData = JSON.parse(atob(loginDataString)) || {};
 
+      console.log("Login armazenado:", loginData);
+      console.log("Tarefas armazenadas:", rawData);
+
+      // **Agora verificamos corretamente se há tarefas associadas ao email**
+      if (loginData.email && rawData[loginData.email]) {
+        storage = rawData[loginData.email];
+      } else {
+        console.warn(
+          `O email "${loginData.email}" não tem tarefas associadas.`
+        );
+      }
+    } catch (e) {
+      console.error("Erro ao interpretar os dados do armazenamento local.", e);
+    }
+  } else {
+    console.warn("Nenhum dado encontrado no localStorage.");
+  }
   // Cria botões para cada dia/mês
   for (const date in storage) {
     const dateButton = document.createElement("button");
@@ -317,7 +334,7 @@ function removerData(date) {
   let storage = {};
   try {
     storage = JSON.parse(atob(localStorage.getItem("gjs5s4c1a24ss4d"))) || {};
-  } catch (e) {
+  } catch {
     console.error("Erro ao carregar as tarefas:", e);
   }
 
