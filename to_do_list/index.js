@@ -155,14 +155,14 @@ const tarefa = () => {
         return;
       }
 
-      const fullDate = new Date(dateInput.value);
+      const fullDate = new Date(dateInput.value + "T00:00"); // Adiciona horário para evitar problemas de fuso
       const dateValue = `${fullDate.getDate().toString().padStart(2, "0")}/${(
         fullDate.getMonth() + 1
       )
         .toString()
         .padStart(2, "0")}`;
 
-      console.log("Data formatada:", dateValue); // Exemplo: "21/04"
+      console.log("Data formatada corretamente:", dateValue); // Exemplo esperado: "21/04"
       const taskValue = taskInput.value;
 
       // Verifica se a tarefa foi preenchida
