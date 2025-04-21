@@ -155,17 +155,15 @@ const tarefa = () => {
         return;
       }
 
-      const dateValue = dateInput.value;
-      const taskValue = taskInput.value;
+      const fullDate = new Date(dateInput.value);
+      const dateValue = `${fullDate.getDate().toString().padStart(2, "0")}/${(
+        fullDate.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, "0")}`;
 
-      // Validação: verifica se a data está no formato correto DD/MM
-      const dateRegex = /^\d{2}\/\d{2}$/;
-      if (!dateValue || !dateRegex.test(dateValue) || dateValue.length !== 5) {
-        alert(
-          "Por favor, insira uma data válida no formato DD/MM (Ex: 01/01)."
-        );
-        return;
-      }
+      console.log("Data formatada:", dateValue); // Exemplo: "21/04"
+      const taskValue = taskInput.value;
 
       // Verifica se a tarefa foi preenchida
       if (!taskValue) {
