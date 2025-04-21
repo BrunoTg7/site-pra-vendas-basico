@@ -138,6 +138,11 @@ const tarefa = () => {
         .padStart(2, "0")}`;
 
       console.log("Data formatada:", formattedDate); // Exemplo: "21/04"
+
+      // Define o foco para garantir que o cursor apareça no campo após a mudança
+      setTimeout(() => {
+        dateInput.focus();
+      }, 100); // Pequeno atraso para garantir que o evento de mudança seja registrado corretamente
     });
     saveButton.addEventListener("click", () => {
       const dateInput = document.getElementById(`date-${idCounter}`);
