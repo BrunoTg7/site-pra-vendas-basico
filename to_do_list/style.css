@@ -13,11 +13,12 @@ main {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding-top: 7%;
+  padding-top: 15%;
 }
 
 /* Container principal */
 .container {
+  margin-top: -2%;
   width: 100%;
   max-width: 400px;
   background-color: #ffffff;
