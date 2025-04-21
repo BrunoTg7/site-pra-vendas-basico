@@ -14,10 +14,6 @@ main {
   align-items: center;
   min-height: 100vh;
 }
-h1 {
-  margin-top: 4%;
-  position: relative;
-}
 /* Container principal */
 .container {
   width: 100%;
@@ -263,10 +259,11 @@ h1 {
   background-color: #f0f0f0;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: absolute; /* Faz com que o elemento seja posicionado de forma absoluta */
   top: 4%; /* Posiciona no topo */
   left: 50%; /* Centraliza horizontalmente com base na largura da tela */
   transform: translateX(-50%); /* Ajusta para realmente ficar centralizado */
   width: 100%; /* Faz o elemento ocupar toda a largura */
   max-width: 600px; /* Define um limite para o tamanho máximo */
+  margin-top: 4%;
+  position: relative;
 }
