@@ -132,11 +132,19 @@ const tarefa = () => {
     saveButton.id = `save-${idCounter}`;
 
     saveButton.addEventListener("click", () => {
-      const dateValue = document.getElementById(`date-${idCounter}`).value;
-      const taskValue = document.getElementById(`task-${idCounter}`).value;
+      const dateInput = document.getElementById(`date-${idCounter}`);
+      const taskInput = document.getElementById(`task-${idCounter}`);
+
+      if (!dateInput || !taskInput) {
+        alert("Erro: Campos de data ou tarefa não encontrados.");
+        return;
+      }
+
+      const dateValue = dateInput.value;
+      const taskValue = taskInput.value;
 
       // Validação: verifica se a data está no formato correto DD/MM
-      const dateRegex = /^\d{2}\/\d{2}$/; // Expressão regular para "DD/MM"
+      const dateRegex = /^\d{2}\/\d{2}$/;
       if (!dateValue || !dateRegex.test(dateValue) || dateValue.length !== 5) {
         alert(
           "Por favor, insira uma data válida no formato DD/MM (Ex: 01/01)."
@@ -149,6 +157,7 @@ const tarefa = () => {
         alert("Por favor, preencha a tarefa antes de salvar.");
         return;
       }
+
       const loginData = localStorage.getItem("5s51d2a30as5f");
       if (!loginData) {
         alert("Erro: Usuário não encontrado!");
@@ -182,13 +191,12 @@ const tarefa = () => {
       atualizarLista();
 
       // Remove os inputs e o botão após salvar
-      document.getElementById(`date-${idCounter}`).remove(); // Remove o campo de data
-      document.getElementById(`task-${idCounter}`).remove(); // Remove o campo de tarefa
-      saveButton.remove(); // Remove o botão de salvar
+      dateInput.remove();
+      taskInput.remove();
+      saveButton.remove();
 
-      verificarListaVazia(); // Verifica se a lista ficou vazia
+      verificarListaVazia();
     });
-
     lista.appendChild(dateInput);
     lista.appendChild(taskInput);
     lista.appendChild(saveButton);
@@ -232,16 +240,16 @@ function atualizarLista() {
       const rawData = JSON.parse(atob(rawDataString)) || {};
       const loginData = JSON.parse(atob(loginDataString)) || {};
 
-      console.log("Login armazenado:", loginData);
-      console.log("Tarefas armazenadas:", rawData);
-
-      // **Agora verificamos corretamente se há tarefas associadas ao email**
-      if (loginData.email && rawData[loginData.email]) {
-        storage = rawData[loginData.email];
+      if (loginData.email) {
+        if (rawData[loginData.email]) {
+          storage = rawData[loginData.email];
+        } else {
+          console.warn(
+            `O email "${loginData.email}" não tem tarefas associadas.`
+          );
+        }
       } else {
-        console.warn(
-          `O email "${loginData.email}" não tem tarefas associadas.`
-        );
+        console.warn("O login não contém um email válido.");
       }
     } catch (e) {
       console.error("Erro ao interpretar os dados do armazenamento local.", e);
@@ -249,22 +257,30 @@ function atualizarLista() {
   } else {
     console.warn("Nenhum dado encontrado no localStorage.");
   }
+
+  // **Verifique se há tarefas para evitar erro ao iterar**
+  if (Object.keys(storage).length === 0) {
+    console.warn("Nenhuma tarefa para exibir.");
+    return;
+  }
+
   // Cria botões para cada dia/mês
   for (const date in storage) {
-    const dateButton = document.createElement("button");
-    dateButton.textContent = `Tarefas de ${date}`;
-    dateButton.className = "dateButton";
+    if (storage.hasOwnProperty(date)) {
+      const dateButton = document.createElement("button");
+      dateButton.textContent = `Tarefas de ${date}`;
+      dateButton.className = "dateButton";
 
-    // Evento para exibir as tarefas associadas à data
-    dateButton.addEventListener("click", () => {
-      const tasks = storage[date];
-      exibirTarefasDoDia(date, tasks); // Exibe as tarefas da data clicada
-    });
+      // Evento para exibir as tarefas associadas à data
+      dateButton.addEventListener("click", () => {
+        const tasks = storage[date];
+        exibirTarefasDoDia(date, tasks); // Exibe as tarefas da data clicada
+      });
 
-    toDoList.appendChild(dateButton);
+      toDoList.appendChild(dateButton);
+    }
   }
 }
-
 function exibirTarefasDoDia(date, tasks) {
   const toDoList = document.querySelector(".toDoList");
 
