@@ -332,7 +332,7 @@ function exibirTarefasDoDia(date, tasks) {
     checkbox.checked = selecao;
     checkbox.addEventListener("change", () => {
       task.selecao = checkbox.checked; // Atualiza o estado
-      salvarTarefasNoLocalStorage();
+      salvarTarefasNoLocalStorage(date, tasks); // Passa os argumentos corretos
     });
 
     const span = document.createElement("span");
@@ -345,7 +345,7 @@ function exibirTarefasDoDia(date, tasks) {
       if (tasks.length === 0) {
         removerData(date); // Remove a data se não houver mais tarefas
       } else {
-        salvarTarefasNoLocalStorage(); // Atualiza o localStorage se ainda houver tarefas
+        salvarTarefasNoLocalStorage(date, tasks); // Atualiza o localStorage
         exibirTarefasDoDia(date, tasks); // Atualiza a interface
       }
     });
@@ -374,11 +374,29 @@ function removerData(date) {
   atualizarLista();
 }
 
-function salvarTarefasNoLocalStorage() {
-  const storage = JSON.parse(
-    atob(localStorage.getItem("gjs5s4c1a24ss4d")) || "{}"
-  );
-  localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
+function salvarTarefasNoLocalStorage(date, tasks) {
+  const rawDataString = localStorage.getItem("gjs5s4c1a24ss4d");
+  if (!rawDataString) {
+    console.warn("Nenhum dado encontrado no localStorage.");
+    return;
+  }
+
+  try {
+    let storage = JSON.parse(atob(rawDataString)) || {};
+    const loginData =
+      JSON.parse(atob(localStorage.getItem("5s51d2a30as5f"))) || {};
+    const email = loginData.email;
+
+    if (email && storage[email]) {
+      storage[email][date] = tasks; // Atualiza as tarefas daquela data
+      localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
+      console.log(`Tarefas do dia ${date} foram salvas para ${email}`);
+    } else {
+      console.warn(`Nenhum espaço encontrado para o email ${email}`);
+    }
+  } catch (e) {
+    console.error("Erro ao interpretar os dados do armazenamento local:", e);
+  }
 }
 
 document.getElementById("sair").addEventListener("click", () => {
