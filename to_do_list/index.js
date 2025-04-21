@@ -127,7 +127,9 @@ const tarefa = () => {
     saveButton.textContent = "Salvar";
     saveButton.type = "button";
     saveButton.id = `save-${idCounter}`;
-
+    dateInput.addEventListener("focus", () => {
+      dateInput.showPicker(); // Abre automaticamente o calendário ao ganhar foco
+    });
     dateInput.addEventListener("change", () => {
       const fullDate = new Date(dateInput.value);
       const formattedDate = `${fullDate
