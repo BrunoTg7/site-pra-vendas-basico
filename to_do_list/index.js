@@ -131,20 +131,17 @@ const tarefa = () => {
       dateInput.showPicker(); // Abre automaticamente o calendário ao ganhar foco
     });
     dateInput.addEventListener("change", () => {
-      const fullDate = new Date(dateInput.value);
-      const formattedDate = `${fullDate
-        .getDate()
-        .toString()
-        .padStart(2, "0")}/${(fullDate.getMonth() + 1)
-        .toString()
-        .padStart(2, "0")}`;
+      const selectedDate = dateInput.value; // O formato é YYYY-MM-DD
+      const [year, month, day] = selectedDate.split("-"); // Divide o formato
 
-      console.log("Data formatada:", formattedDate); // Exemplo: "21/04"
+      const formattedDate = `${day}/${month}`; // Reorganiza para DD/MM
+
+      console.log("Data formatada corretamente:", formattedDate); // Exemplo esperado: "21/04"
 
       // Define o foco para garantir que o cursor apareça no campo após a mudança
       setTimeout(() => {
         dateInput.focus();
-      }, 100); // Pequeno atraso para garantir que o evento de mudança seja registrado corretamente
+      }, 100);
     });
     saveButton.addEventListener("click", () => {
       const dateInput = document.getElementById(`date-${idCounter}`);
