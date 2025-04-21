@@ -158,34 +158,35 @@ const tarefa = () => {
         return;
       }
 
-      const loginData = localStorage.getItem("5s51d2a30as5f");
-      if (!loginData) {
-        alert("Erro: Usuário não encontrado!");
+      const loginData =
+        JSON.parse(atob(localStorage.getItem("5s51d2a30as5f"))) || {};
+      const email = loginData.email;
+
+      if (!email) {
+        console.warn("Erro: Nenhum email encontrado no login.");
         return;
       }
-
-      const login = JSON.parse(atob(loginData)) || {};
 
       let storage =
         JSON.parse(atob(localStorage.getItem("gjs5s4c1a24ss4d"))) || {};
 
-      // Garante que há um espaço para o usuário
-      if (!storage[login.email]) {
-        storage[login.email] = {};
+      if (!storage[email]) {
+        storage[email] = {};
       }
 
-      // Garante que há um espaço para a data
-      if (!storage[login.email][dateValue]) {
-        storage[login.email][dateValue] = [];
+      if (!storage[email][dateValue]) {
+        storage[email][dateValue] = [];
       }
 
-      storage[login.email][dateValue].push({
+      storage[email][dateValue].push({
         lista: taskValue,
         selecao: false,
         data: dateValue,
       });
 
       localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
+
+      console.log(`Tarefa salva com sucesso para ${email} no dia ${dateValue}`);
 
       alert(`Tarefa salva para ${dateValue}: ${taskValue}`);
       atualizarLista();
