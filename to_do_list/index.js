@@ -390,7 +390,7 @@ function salvarTarefasNoLocalStorage(date, tasks) {
     if (email && storage[email]) {
       storage[email][date] = tasks; // Atualiza as tarefas daquela data
       localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
-      console.log(`Tarefas do dia ${date} foram salvas para ${email}`);
+      console.log(`Tarefas do dia ${date} foram atualizadas para ${email}`);
     } else {
       console.warn(`Nenhum espaço encontrado para o email ${email}`);
     }
