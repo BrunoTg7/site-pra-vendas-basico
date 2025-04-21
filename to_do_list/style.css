@@ -150,7 +150,9 @@ main {
   border-radius: 4px;
   outline: none;
 }
-
+input[type="date"] {
+  cursor: pointer;
+}
 .lista input[type="text"]:focus,
 .lista input[type="date"]:focus {
   border-color: #4caf50;
