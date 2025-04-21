@@ -142,7 +142,8 @@ main {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.lista input[type="text"] {
+.lista input[type="text"],
+.lista input[type="date"] {
   padding: 8px;
   font-size: 14px;
   border: 1px solid #ccc;
@@ -150,7 +151,8 @@ main {
   outline: none;
 }
 
-.lista input[type="text"]:focus {
+.lista input[type="text"]:focus,
+.lista input[type="date"]:focus {
   border-color: #4caf50;
   box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
