@@ -254,12 +254,12 @@ h1 {
   color: #4caf50;
   text-align: center; /* Centraliza horizontalmente */
   text-transform: uppercase;
-  margin: 0 auto 4%; /* Remove margens padrão */
+  margin: 0; /* Remove margens padrão */
   padding: 10px;
   background-color: #f0f0f0;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: fixed; /* Faz com que o elemento seja posicionado de forma absoluta */
+  position: absolute; /* Faz com que o elemento seja posicionado de forma absoluta */
   top: 4%; /* Posiciona no topo */
   left: 50%; /* Centraliza horizontalmente com base na largura da tela */
   transform: translateX(-50%); /* Ajusta para realmente ficar centralizado */
