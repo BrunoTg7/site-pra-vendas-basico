@@ -369,19 +369,37 @@ function exibirTarefasDoDia(date, tasks) {
 }
 
 function removerData(date) {
-  let storage = {};
-  try {
-    storage = JSON.parse(atob(localStorage.getItem("gjs5s4c1a24ss4d"))) || {};
-  } catch {
-    console.error("Erro ao carregar as tarefas:", e);
+  let rawDataString = localStorage.getItem("gjs5s4c1a24ss4d");
+  if (!rawDataString) {
+    console.warn("Nenhum dado encontrado no localStorage.");
+    return;
   }
 
-  // Remove a data do storage
-  delete storage[date];
-  localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
+  try {
+    let storage = JSON.parse(atob(rawDataString)) || {};
+    const loginData =
+      JSON.parse(atob(localStorage.getItem("5s51d2a30as5f"))) || {};
+    const email = loginData.email;
 
-  // Atualiza a interface
-  atualizarLista();
+    if (email && storage[email]) {
+      delete storage[email][date]; // Remove todas as tarefas do dia
+
+      // Se não houver mais tarefas para esse usuário, exclui completamente os dados
+      if (Object.keys(storage[email]).length === 0) {
+        delete storage[email];
+      }
+
+      localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
+      console.log(`Todas as tarefas de ${date} foram removidas.`);
+    } else {
+      console.warn(`Nenhuma tarefa encontrada para ${email} na data ${date}.`);
+    }
+
+    // Atualiza a interface para remover os elementos visuais da lista
+    atualizarLista();
+  } catch (e) {
+    console.error("Erro ao interpretar os dados do armazenamento local:", e);
+  }
 }
 
 function salvarTarefasNoLocalStorage(date, tasks) {
