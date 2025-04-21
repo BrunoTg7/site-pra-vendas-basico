@@ -17,6 +17,7 @@ main {
 
 /* Container principal */
 .container {
+  margin-top: 10.4%;
   width: 100%;
   max-width: 400px;
   background-color: #ffffff;
