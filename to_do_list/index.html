@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="icon_for_to-do_list-removebg-preview (1).png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <main>
+      <h1>To Do list</h1>
+
+      <button id="sair">
+        <img src="icon_for_to-do_list-removebg-preview.png" alt="" />
+      </button>
+      <div class="container">
+        <div class="login">
+          <label for="email">Email: </label>
+          <input
+            type="email"
+            id="email"
+            placeholder="bruno@gmail.com"
+            required
+          />
+          <label for="senha">Senha: </label>
+          <input type="password" name="" id="senha" minlength="8" required />
+
+          <button id="logar" type="button">Login</button>
+        </div>
+        <div class="cadastro">
+          <label for="email">Email: </label>
+          <input
+            type="email"
+            id="email1"
+            placeholder="bruno@gmail.com"
+            required
+          />
+          <label for="senha">Senha: </label>
+          <input type="password" name="" id="senha1" minlength="8" required />
+
+          <button id="cadastro" type="button">Cadastrar</button>
+        </div>
+
+        <div class="tarefa" style="display: none"></div>
+      </div>
+    </main>
+    <head>
+      <div class="overlay" id="overlay">
+        <div class="cookies-msg" id="cookies-msg">
+          <div class="cookies-txt">
+            <p>
+              Este site foi desenvolvido para ajudar você a organizar suas
+              listas de tarefas de forma prática e personalizada. O sistema de
+              login não armazena seus dados em servidores externos; ele serve
+              apenas para validar sua identidade e manter as informações salvas
+              no <strong>localStorage</strong> do seu próprio navegador. Dessa
+              forma, seus dados permanecem protegidos e acessíveis somente a
+              você.<br />
+              Vale lembrar que, ao limpar o cache do navegador, as informações
+              armazenadas temporariamente serão apagadas. Isso garante total
+              controle sobre sua privacidade e seus dados.
+            </p>
+
+            <div class="cookies-btn">
+              <button class="cookies-btn2">Aceito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </head>
+    <script src="index.js"></script>
+  </body>
+</html>
