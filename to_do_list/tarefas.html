@@ -12,50 +12,23 @@
     />
   </head>
   <body>
-    <main>
-      <h1>To Do list</h1>
-
+    <header>
+      <h1>To Do List</h1>
       <button id="sair">
         <img src="icon_for_to-do_list-removebg-preview.png" alt="" />
       </button>
-      <div class="container">
-        <div class="login">
-          <div class="section-header">
-            <h2 class="section-title">Login</h2>
-            <p class="helper-text">
-              Acesse suas tarefas pessoais com segurança.
-            </p>
+    </header>
+    <main>
+      <div class="container-2">
+        <div class="tarefa" style="display: none">
+          <div class="box-tarefa">
+            <button id="gerarList" type="button">Adicionar Tarefa</button>
+            <button id="limparLista" type="button" style="display: none">
+              Limpar Lista
+            </button>
           </div>
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="bruno@gmail.com"
-            required
-          />
-          <label for="senha">Senha</label>
-          <input type="password" name="" id="senha" minlength="8" required />
-
-          <button id="logar" type="button">Login</button>
-        </div>
-        <div class="cadastro">
-          <div class="section-header">
-            <h2 class="section-title">Criar conta</h2>
-            <p class="helper-text">
-              Cadastre-se para salvar listas no seu dispositivo.
-            </p>
-          </div>
-          <label for="email1">Email</label>
-          <input
-            type="email"
-            id="email1"
-            placeholder="bruno@gmail.com"
-            required
-          />
-          <label for="senha1">Senha</label>
-          <input type="password" name="" id="senha1" minlength="8" required />
-
-          <button id="cadastro" type="button">Cadastrar</button>
+          <div class="lista" style="display: none"></div>
+          <div class="toDoList"></div>
         </div>
       </div>
     </main>

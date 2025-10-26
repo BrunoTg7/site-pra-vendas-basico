@@ -3,47 +3,58 @@ let logoutTimer;
 // Quando o DOM estiver carregado
 document.addEventListener("DOMContentLoaded", () => {
   verificarTempoDeSessao();
-  document.getElementById("cadastro").addEventListener("click", cadastroSalvo);
-  document.getElementById("logar").addEventListener("click", loginSalvo);
+  const cadastroBtn = document.getElementById("cadastro");
+  if (cadastroBtn) cadastroBtn.addEventListener("click", cadastroSalvo);
+  const logarBtn = document.getElementById("logar");
+  if (logarBtn) logarBtn.addEventListener("click", loginSalvo);
 });
 
 // Função para realizar o cadastro
 function cadastroSalvo() {
+  console.log("Botão cadastro clicado");
   const senha = document.getElementById("senha1").value;
   const email = document.getElementById("email1").value;
+  console.log("Email cadastrado:", email, "Senha cadastrada:", senha);
 
   const cadastro = {
     senha: senha,
     email: email,
   };
   localStorage.setItem("5s51d2a30as5f", btoa(JSON.stringify(cadastro)));
+  console.log("Dados salvos no localStorage");
+
   alert("Cadastro realizado com sucesso!");
-  document.querySelector(".cadastro").style.display = "none";
-  document.querySelector(".login").style.display = "none";
+
   verificarTempoDeSessao();
+  window.location.href = "tarefas.html";
 }
-// Função para realizar login
+
 function loginSalvo() {
+  console.log("Botão login clicado");
   const senha = document.getElementById("senha").value;
   const email = document.getElementById("email").value;
+  console.log("Email digitado:", email, "Senha digitada:", senha);
 
   let login;
   try {
     login = JSON.parse(atob(localStorage.getItem("5s51d2a30as5f"))) || {};
-  } catch {
+  } catch (e) {
     console.error("Erro ao decodificar os dados do login:", e);
     login = {};
   }
+  console.log("Dados salvos no localStorage:", login);
 
   if (login.email === email && login.senha === senha) {
+    console.log("Login válido, redirecionando...");
     const now = new Date();
     localStorage.setItem("loginTime", now.toISOString());
 
     alert("Login realizado com sucesso!");
-    document.querySelector(".login").style.display = "none";
-    document.querySelector(".cadastro").style.display = "none";
+
     verificarTempoDeSessao();
+    window.location.href = "tarefas.html";
   } else {
+    console.log("Login inválido");
     alert("Credenciais inválidas. Tente novamente.");
   }
 }
@@ -65,9 +76,15 @@ function verificarTempoDeSessao() {
     } else {
       iniciarTimerDeLogout(timeout - diff);
 
-      document.querySelector(".login").style.display = "none";
-      document.querySelector(".cadastro").style.display = "none";
-      tarefa();
+      if (window.location.pathname.endsWith("tarefas.html")) {
+        const loginEl = document.querySelector(".login");
+        if (loginEl) loginEl.style.display = "none";
+        const cadastroEl = document.querySelector(".cadastro");
+        if (cadastroEl) cadastroEl.style.display = "none";
+        tarefa();
+      } else {
+        window.location.href = "tarefas.html";
+      }
     }
   } else {
     deslogarUsuario();
@@ -86,109 +103,191 @@ function iniciarTimerDeLogout(tempoRestante) {
 
 // Função para deslogar o usuário
 function deslogarUsuario() {
-  localStorage.removeItem("loginTime");
+  const tarefaEl = document.querySelector(".tarefa");
+  if (tarefaEl) {
+    tarefaEl.style.display = "none";
+  }
 
-  document.querySelector(".login").style.display = "flex";
-  document.querySelector(".cadastro").style.display = "flex";
-  document.querySelector(".tarefa").style.display = "none";
+  localStorage.removeItem("loggedUser");
+
+  if (window.location.pathname.endsWith("tarefas.html")) {
+    window.location.href = "index.html";
+  }
 }
 
 const tarefa = () => {
   const tarefas = document.querySelector(".tarefa");
+  if (!tarefas) return; // Proteção se não estiver na página certa
   tarefas.style.display = "flex";
-  tarefas.innerHTML = `
-        <button id="gerarList" type="button">Adicionar Tarefa</button>
-        <button id="limparLista" type="button" style="display: none;">Limpar Lista</button>
-        <div class="lista" style="display: none"></div>
-        <div class="toDoList"></div>
-      `;
 
   // Evento para adicionar tarefa
   document.getElementById("gerarList").addEventListener("click", () => {
     const lista = document.querySelector(".lista");
     const limparListaButton = document.getElementById("limparLista");
-    lista.style.display = "flex"; // Mostra a div lista
-    limparListaButton.style.display = "inline-block"; // Mostra o botão de limpar
+    lista.style.display = "flex";
+    limparListaButton.style.display = "inline-block";
 
-    const idCounter = new Date().getTime(); // Gera IDs únicos baseados no timestamp
+    if (lista.querySelector(".task-form")) {
+      const firstInput = lista.querySelector(".task-form input[type='text']");
+      if (firstInput) firstInput.focus();
+      return;
+    }
 
-    // Input para selecionar a data (dia/mês)
+    const idCounter = Date.now();
+    const formContainer = document.createElement("div");
+    formContainer.className = "task-form";
+    formContainer.id = `task-form-${idCounter}`;
+
     const dateInput = document.createElement("input");
-    dateInput.type = "text";
-    dateInput.placeholder = "Digite o Dia/Mês (Ex: 01/01)";
+    dateInput.type = "date";
+    dateInput.placeholder = "Selecione a data";
     dateInput.id = `date-${idCounter}`;
-    dateInput.maxLength = 5; // Limita o máximo de caracteres a 5
-    dateInput.minLength = 5; // Limita o mínimo de caracteres a 5
+    dateInput.addEventListener("focus", () => {
+      if (typeof dateInput.showPicker === "function") {
+        dateInput.showPicker();
+      }
+    });
 
-    // Input para adicionar a tarefa
-    const taskInput = document.createElement("input");
-    taskInput.type = "text";
-    taskInput.placeholder = "Digite a Tarefa...";
-    taskInput.id = `task-${idCounter}`;
+    const tasksWrapper = document.createElement("div");
+    tasksWrapper.className = "task-inputs";
 
-    // Botão para salvar a tarefa
+    const createTaskRow = ({ showAdd = false, allowRemove = false } = {}) => {
+      const row = document.createElement("div");
+      row.className = "task-input-row";
+
+      const input = document.createElement("input");
+      input.type = "text";
+      input.placeholder = "Digite a Tarefa...";
+      row.appendChild(input);
+
+      if (showAdd) {
+        const addButton = document.createElement("button");
+        addButton.type = "button";
+        addButton.className = "add-task-btn";
+        addButton.title = "Adicionar outra tarefa para esta data";
+        addButton.textContent = "+";
+        addButton.addEventListener("click", () => {
+          const newRow = createTaskRow({ allowRemove: true });
+          tasksWrapper.appendChild(newRow);
+          const newInput = newRow.querySelector("input");
+          if (newInput) newInput.focus();
+        });
+        row.appendChild(addButton);
+      }
+
+      if (allowRemove) {
+        const removeButton = document.createElement("button");
+        removeButton.type = "button";
+        removeButton.className = "remove-task-btn";
+        removeButton.title = "Remover esta tarefa";
+        removeButton.textContent = "\u2212";
+        removeButton.addEventListener("click", () => {
+          row.remove();
+        });
+        row.appendChild(removeButton);
+      }
+
+      return row;
+    };
+
+    tasksWrapper.appendChild(createTaskRow({ showAdd: true }));
+
     const saveButton = document.createElement("button");
     saveButton.textContent = "Salvar";
     saveButton.type = "button";
     saveButton.id = `save-${idCounter}`;
 
     saveButton.addEventListener("click", () => {
-      const dateValue = document.getElementById(`date-${idCounter}`).value;
-      const taskValue = document.getElementById(`task-${idCounter}`).value;
-
-      // Validação: verifica se a data está no formato correto DD/MM
-      const dateRegex = /^\d{2}\/\d{2}$/; // Expressão regular para "DD/MM"
-      if (!dateValue || !dateRegex.test(dateValue) || dateValue.length !== 5) {
-        alert(
-          "Por favor, insira uma data válida no formato DD/MM (Ex: 01/01)."
-        );
+      if (!dateInput.value) {
+        alert("Selecione uma data antes de salvar.");
+        dateInput.focus();
         return;
       }
 
-      // Verifica se a tarefa foi preenchida
-      if (!taskValue) {
-        alert("Por favor, preencha a tarefa antes de salvar.");
+      const taskInputs = Array.from(
+        tasksWrapper.querySelectorAll("input[type='text']")
+      );
+      const taskValues = taskInputs
+        .map((input) => input.value.trim())
+        .filter((value) => value.length > 0);
+
+      if (taskValues.length === 0) {
+        alert("Adicione pelo menos uma tarefa para salvar.");
+        const firstInput = taskInputs[0];
+        if (firstInput) firstInput.focus();
         return;
       }
 
-      // Dados a serem salvos
-      const dados = {
-        lista: taskValue,
-        selecao: false,
-        data: dateValue, // Salva o dia/mês associado à tarefa
-      };
-
-      let storage = {};
-      try {
-        storage =
-          JSON.parse(atob(localStorage.getItem("gjs5s4c1a24ss4d"))) || {};
-      } catch {
-        console.error("Erro ao carregar as tarefas salvas:", e);
+      const fullDate = new Date(dateInput.value + "T00:00");
+      if (Number.isNaN(fullDate.getTime())) {
+        alert("Data inválida. Escolha uma data válida.");
+        dateInput.focus();
+        return;
       }
 
-      // Agrupa tarefas por dia/mês (Exemplo: "14/03")
-      if (!storage[dateValue]) {
-        storage[dateValue] = []; // Cria uma lista para a data se não existir
+      const dateValue = `${fullDate.getDate().toString().padStart(2, "0")}/${(
+        fullDate.getMonth() + 1
+      )
+        .toString()
+        .padStart(2, "0")}`;
+
+      const loginDataString = localStorage.getItem("5s51d2a30as5f");
+      if (!loginDataString) {
+        alert("Erro: Usuário não encontrado!");
+        return;
       }
 
-      storage[dateValue].push(dados); // Adiciona a tarefa à data correspondente
+      const loginData = JSON.parse(atob(loginDataString)) || {};
+      const email = loginData.email;
+
+      if (!email) {
+        console.warn("Erro: Nenhum email encontrado no login.");
+        return;
+      }
+
+      let rawDataString =
+        localStorage.getItem("gjs5s4c1a24ss4d") || btoa(JSON.stringify({}));
+      let storage = JSON.parse(atob(rawDataString)) || {};
+
+      if (!storage[email]) {
+        storage[email] = {};
+      }
+
+      if (!storage[email][dateValue]) {
+        storage[email][dateValue] = [];
+      }
+
+      taskValues.forEach((taskValue) => {
+        storage[email][dateValue].push({
+          lista: taskValue,
+          selecao: false,
+          data: dateValue,
+        });
+      });
+
       localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
 
-      alert(`Tarefa salva para ${dateValue}: ${taskValue}`);
+      console.log(
+        `Tarefas salvas (${taskValues.length}) para ${email} no dia ${dateValue}`
+      );
+
+      alert(
+        taskValues.length === 1
+          ? `Tarefa salva para ${dateValue}: ${taskValues[0]}`
+          : `${taskValues.length} tarefas salvas para ${dateValue}.`
+      );
+
       atualizarLista();
-
-      // Remove os inputs e o botão após salvar
-      document.getElementById(`date-${idCounter}`).remove(); // Remove o campo de data
-      document.getElementById(`task-${idCounter}`).remove(); // Remove o campo de tarefa
-      saveButton.remove(); // Remove o botão de salvar
-
-      verificarListaVazia(); // Verifica se a lista ficou vazia
+      formContainer.remove();
+      verificarListaVazia();
     });
 
-    lista.appendChild(dateInput);
-    lista.appendChild(taskInput);
-    lista.appendChild(saveButton);
-    lista.appendChild(document.createElement("br"));
+    formContainer.appendChild(dateInput);
+    formContainer.appendChild(tasksWrapper);
+    formContainer.appendChild(saveButton);
+
+    lista.appendChild(formContainer);
+    dateInput.focus();
   });
 
   // Evento para limpar todos os elementos da lista
@@ -215,43 +314,96 @@ function verificarListaVazia() {
   }
 }
 
-function atualizarLista() {
-  const toDoList = document.querySelector(".toDoList");
-  toDoList.innerHTML = ""; // Limpa a área de botões de datas
+function obterContextoDeTarefas() {
+  const rawDataString = localStorage.getItem("gjs5s4c1a24ss4d");
+  const loginDataString = localStorage.getItem("5s51d2a30as5f");
 
-  let storage = {};
-  const rawData = localStorage.getItem("gjs5s4c1a24ss4d");
-
-  if (rawData) {
-    try {
-      storage = JSON.parse(atob(rawData)) || {};
-    } catch {
-      console.error(
-        "Erro ao carregar as tarefas. Verifique o conteúdo do armazenamento local."
-      );
-    }
+  if (!rawDataString || !loginDataString) {
+    console.warn("Contexto de tarefas indisponível no localStorage.");
+    return null;
   }
 
-  // Cria botões para cada dia/mês
-  for (const date in storage) {
+  try {
+    const rawData = JSON.parse(atob(rawDataString)) || {};
+    const loginData = JSON.parse(atob(loginDataString)) || {};
+
+    if (!loginData.email) {
+      console.warn("Não foi possível identificar o email do usuário logado.");
+      return null;
+    }
+
+    if (!rawData[loginData.email]) {
+      rawData[loginData.email] = {};
+    }
+
+    return {
+      rawData,
+      email: loginData.email,
+      userStorage: rawData[loginData.email],
+    };
+  } catch (error) {
+    console.error(
+      "Erro ao interpretar dados de tarefas do localStorage.",
+      error
+    );
+    return null;
+  }
+}
+
+function atualizarLista() {
+  const toDoList = document.querySelector(".toDoList");
+  if (!toDoList) return;
+
+  toDoList.innerHTML = "";
+
+  const contexto = obterContextoDeTarefas();
+
+  if (!contexto || !contexto.userStorage) {
+    const emptyState = document.createElement("p");
+    emptyState.className = "empty-state";
+    emptyState.textContent = "Nenhuma tarefa cadastrada ainda.";
+    toDoList.appendChild(emptyState);
+    return;
+  }
+
+  const storage = contexto.userStorage;
+
+  const dates = Object.keys(storage);
+
+  if (dates.length === 0) {
+    const emptyState = document.createElement("p");
+    emptyState.className = "empty-state";
+    emptyState.textContent = "Nenhuma tarefa cadastrada ainda.";
+    toDoList.appendChild(emptyState);
+    return;
+  }
+
+  const orderedDates = dates.sort((a, b) => {
+    const [dayA, monthA] = a.split("/").map(Number);
+    const [dayB, monthB] = b.split("/").map(Number);
+    if (monthA !== monthB) return monthA - monthB;
+    return dayA - dayB;
+  });
+
+  orderedDates.forEach((date) => {
     const dateButton = document.createElement("button");
     dateButton.textContent = `Tarefas de ${date}`;
     dateButton.className = "dateButton";
 
-    // Evento para exibir as tarefas associadas à data
     dateButton.addEventListener("click", () => {
       const tasks = storage[date];
-      exibirTarefasDoDia(date, tasks); // Exibe as tarefas da data clicada
+      exibirTarefasDoDia(date, tasks);
     });
 
     toDoList.appendChild(dateButton);
-  }
+  });
 }
-
 function exibirTarefasDoDia(date, tasks) {
   const toDoList = document.querySelector(".toDoList");
 
-  const previousTasks = toDoList.querySelectorAll(".toDoItem, .dateHeader");
+  const previousTasks = toDoList.querySelectorAll(
+    ".toDoItem, .dateHeader, .task-action-bar, .emptyTasksMessage"
+  );
   previousTasks.forEach((task) => task.remove());
 
   const allDateButtons = toDoList.querySelectorAll(".dateButton");
@@ -275,19 +427,152 @@ function exibirTarefasDoDia(date, tasks) {
   dateHeader.className = "dateHeader";
   toDoList.appendChild(dateHeader);
 
+  if (!tasks || tasks.length === 0) {
+    const emptyState = document.createElement("p");
+    emptyState.className = "emptyTasksMessage";
+    emptyState.textContent = "Nenhuma tarefa cadastrada para esta data.";
+    toDoList.appendChild(emptyState);
+    return;
+  }
+
+  const actionBar = document.createElement("div");
+  actionBar.className = "task-action-bar";
+
+  const actionInfo = document.createElement("span");
+  actionInfo.className = "task-action-info";
+  actionInfo.textContent = "Selecione tarefas e escolha uma nova data:";
+
+  const moveDateInput = document.createElement("input");
+  moveDateInput.type = "date";
+  moveDateInput.className = "task-move-date";
+  moveDateInput.title = "Nova data para as tarefas selecionadas";
+  moveDateInput.placeholder = "dd/mm/aaaa";
+  moveDateInput.setAttribute(
+    "aria-label",
+    "Escolha a nova data para as tarefas"
+  );
+  moveDateInput.addEventListener("focus", () => {
+    if (typeof moveDateInput.showPicker === "function") {
+      moveDateInput.showPicker();
+    }
+  });
+
+  const buttonsGroup = document.createElement("div");
+  buttonsGroup.className = "task-action-buttons";
+
+  const moveButton = document.createElement("button");
+  moveButton.type = "button";
+  moveButton.className = "bulk-action-btn bulk-action-move";
+  moveButton.textContent = "Mover selecionadas";
+
+  const copyButton = document.createElement("button");
+  copyButton.type = "button";
+  copyButton.className = "bulk-action-btn bulk-action-copy";
+  copyButton.textContent = "Copiar";
+
+  const clearButton = document.createElement("button");
+  clearButton.type = "button";
+  clearButton.className = "bulk-action-btn bulk-action-clear";
+  clearButton.textContent = "Limpar seleção";
+
+  buttonsGroup.append(moveButton, copyButton, clearButton);
+  actionBar.append(actionInfo, moveDateInput, buttonsGroup);
+  toDoList.appendChild(actionBar);
+
+  const updateBulkActionState = () => {
+    const hasSelection = tasks.some((task) => task.selecao);
+    const hasDate = Boolean(moveDateInput.value);
+    moveButton.disabled = !hasSelection || !hasDate;
+    copyButton.disabled = !hasSelection || !hasDate;
+    clearButton.disabled = !hasSelection;
+  };
+
+  moveDateInput.addEventListener("input", updateBulkActionState);
+  moveDateInput.addEventListener("change", updateBulkActionState);
+
+  moveButton.addEventListener("click", () => {
+    const result = moverOuCopiarTarefas(date, moveDateInput.value, {
+      copy: false,
+    });
+
+    if (!result.success) {
+      return;
+    }
+
+    const message =
+      result.transferredCount === 1
+        ? `Tarefa movida para ${result.targetDateValue}.`
+        : `${result.transferredCount} tarefas movidas para ${result.targetDateValue}.`;
+
+    moveDateInput.value = "";
+    updateBulkActionState();
+    atualizarLista();
+
+    const dateToShow = result.removedOrigin ? result.targetDateValue : date;
+
+    const tasksToShow =
+      result.userStorage[dateToShow] && result.userStorage[dateToShow].length
+        ? result.userStorage[dateToShow]
+        : null;
+
+    if (tasksToShow) {
+      exibirTarefasDoDia(dateToShow, tasksToShow);
+    }
+
+    alert(message);
+  });
+
+  copyButton.addEventListener("click", () => {
+    const result = moverOuCopiarTarefas(date, moveDateInput.value, {
+      copy: true,
+    });
+
+    if (!result.success) {
+      return;
+    }
+
+    const message =
+      result.transferredCount === 1
+        ? `Tarefa copiada para ${result.targetDateValue}.`
+        : `${result.transferredCount} tarefas copiadas para ${result.targetDateValue}.`;
+
+    moveDateInput.value = "";
+    atualizarLista();
+
+    const tasksToShow = result.userStorage[date] || [];
+    exibirTarefasDoDia(date, tasksToShow);
+
+    alert(message);
+  });
+
+  clearButton.addEventListener("click", () => {
+    const hasSelection = tasks.some((task) => task.selecao);
+    if (!hasSelection) return;
+    tasks.forEach((task) => {
+      task.selecao = false;
+    });
+    salvarTarefasNoLocalStorage(date, tasks);
+    exibirTarefasDoDia(date, tasks);
+  });
+
   // Exibe as tarefas daquela data
   tasks.forEach((task, index) => {
     const { lista, selecao } = task;
 
     const item = document.createElement("div");
     item.className = "toDoItem";
+    if (selecao) {
+      item.classList.add("selected-task");
+    }
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = selecao;
     checkbox.addEventListener("change", () => {
-      task.selecao = checkbox.checked; // Atualiza o estado
-      salvarTarefasNoLocalStorage();
+      task.selecao = checkbox.checked;
+      item.classList.toggle("selected-task", checkbox.checked);
+      salvarTarefasNoLocalStorage(date, tasks);
+      updateBulkActionState();
     });
 
     const span = document.createElement("span");
@@ -296,12 +581,12 @@ function exibirTarefasDoDia(date, tasks) {
     const removerButton = document.createElement("button");
     removerButton.textContent = "Remover";
     removerButton.addEventListener("click", () => {
-      tasks.splice(index, 1); // Remove a tarefa da lista
+      tasks.splice(index, 1);
       if (tasks.length === 0) {
-        removerData(date); // Remove a data se não houver mais tarefas
+        removerData(date);
       } else {
-        salvarTarefasNoLocalStorage(); // Atualiza o localStorage se ainda houver tarefas
-        exibirTarefasDoDia(date, tasks); // Atualiza a interface
+        salvarTarefasNoLocalStorage(date, tasks);
+        exibirTarefasDoDia(date, tasks);
       }
     });
 
@@ -311,31 +596,181 @@ function exibirTarefasDoDia(date, tasks) {
 
     toDoList.appendChild(item);
   });
+
+  updateBulkActionState();
+}
+
+function moverOuCopiarTarefas(date, targetISO, { copy = false } = {}) {
+  if (!targetISO) {
+    alert("Selecione uma data de destino.");
+    return { success: false };
+  }
+
+  const contexto = obterContextoDeTarefas();
+  if (!contexto) {
+    alert("Não foi possível acessar as tarefas salvas.");
+    return { success: false };
+  }
+
+  const { rawData, email, userStorage } = contexto;
+  const sourceTasks = userStorage[date];
+
+  if (!sourceTasks || sourceTasks.length === 0) {
+    alert("Não há tarefas para mover nesta data.");
+    return { success: false };
+  }
+
+  const selectedTasks = sourceTasks
+    .map((task, index) => ({ task, index }))
+    .filter(({ task }) => task.selecao);
+
+  if (selectedTasks.length === 0) {
+    alert("Selecione pelo menos uma tarefa.");
+    return { success: false };
+  }
+
+  const fullDate = new Date(targetISO + "T00:00");
+  if (Number.isNaN(fullDate.getTime())) {
+    alert("Data de destino inválida.");
+    return { success: false };
+  }
+
+  const targetDateValue = `${fullDate.getDate().toString().padStart(2, "0")}/${(
+    fullDate.getMonth() + 1
+  )
+    .toString()
+    .padStart(2, "0")}`;
+
+  if (!copy && targetDateValue === date) {
+    alert("As tarefas já estão cadastradas nesta data.");
+    return { success: false };
+  }
+
+  if (!userStorage[targetDateValue]) {
+    userStorage[targetDateValue] = [];
+  }
+
+  const tasksToTransfer = selectedTasks.map(({ task }) => ({
+    ...task,
+    data: targetDateValue,
+    selecao: false,
+  }));
+
+  userStorage[targetDateValue].push(...tasksToTransfer);
+
+  let removedOrigin = false;
+
+  if (copy) {
+    sourceTasks.forEach((task) => {
+      task.selecao = false;
+    });
+  } else {
+    const indexesToRemove = new Set(selectedTasks.map(({ index }) => index));
+    userStorage[date] = sourceTasks.filter(
+      (_, index) => !indexesToRemove.has(index)
+    );
+
+    if (userStorage[date].length === 0) {
+      delete userStorage[date];
+      removedOrigin = true;
+    } else {
+      userStorage[date].forEach((task) => {
+        task.selecao = false;
+      });
+    }
+  }
+
+  const encoded = btoa(JSON.stringify(rawData));
+  localStorage.setItem("gjs5s4c1a24ss4d", encoded);
+
+  return {
+    success: true,
+    targetDateValue,
+    removedOrigin,
+    userStorage,
+    transferredCount: tasksToTransfer.length,
+  };
 }
 
 function removerData(date) {
-  let storage = {};
-  try {
-    storage = JSON.parse(atob(localStorage.getItem("gjs5s4c1a24ss4d"))) || {};
-  } catch {
-    console.error("Erro ao carregar as tarefas:", e);
+  let rawDataString = localStorage.getItem("gjs5s4c1a24ss4d");
+  if (!rawDataString) {
+    console.warn("Nenhum dado encontrado no localStorage.");
+    return;
   }
 
-  // Remove a data do storage
-  delete storage[date];
-  localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
+  try {
+    let storage = JSON.parse(atob(rawDataString)) || {};
+    const loginData =
+      JSON.parse(atob(localStorage.getItem("5s51d2a30as5f"))) || {};
+    const email = loginData.email;
 
-  // Atualiza a interface
-  atualizarLista();
+    if (email && storage[email]) {
+      delete storage[email][date]; // Remove todas as tarefas do dia
+
+      // Se não houver mais tarefas para esse usuário, exclui completamente os dados
+      if (Object.keys(storage[email]).length === 0) {
+        delete storage[email];
+      }
+
+      localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
+      console.log(`Todas as tarefas de ${date} foram removidas.`);
+    } else {
+      console.warn(`Nenhuma tarefa encontrada para ${email} na data ${date}.`);
+    }
+
+    // Atualiza a interface para remover os elementos visuais da lista
+    atualizarLista();
+  } catch (e) {
+    console.error("Erro ao interpretar os dados do armazenamento local:", e);
+  }
 }
 
-function salvarTarefasNoLocalStorage() {
-  const storage = JSON.parse(
-    atob(localStorage.getItem("gjs5s4c1a24ss4d")) || "{}"
-  );
-  localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
+function salvarTarefasNoLocalStorage(date, tasks) {
+  const rawDataString = localStorage.getItem("gjs5s4c1a24ss4d");
+  if (!rawDataString) {
+    console.warn("Nenhum dado encontrado no localStorage.");
+    return;
+  }
+
+  try {
+    let storage = JSON.parse(atob(rawDataString)) || {};
+    const loginData =
+      JSON.parse(atob(localStorage.getItem("5s51d2a30as5f"))) || {};
+    const email = loginData.email;
+
+    if (email && storage[email]) {
+      storage[email][date] = tasks; // Atualiza as tarefas daquela data
+      localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
+      console.log(`Tarefas do dia ${date} foram atualizadas para ${email}`);
+    } else {
+      console.warn(`Nenhum espaço encontrado para o email ${email}`);
+    }
+  } catch (e) {
+    console.error("Erro ao interpretar os dados do armazenamento local:", e);
+  }
 }
 
-document.getElementById("sair").addEventListener("click", () => {
-  deslogarUsuario();
-});
+const sairBtn = document.getElementById("sair");
+if (sairBtn) {
+  sairBtn.addEventListener("click", () => {
+    deslogarUsuario();
+  });
+}
+
+var div = document.getElementById("overlay");
+
+function verificarCookies() {
+  localStorage.lgbd = "sim";
+  div.classList.remove("amostrar");
+}
+
+if (localStorage.lgbd === "a") {
+  div.classList.remove("amostrar");
+} else {
+  div.classList.add("amostrar");
+}
+
+document
+  .querySelector(".cookies-btn2")
+  .addEventListener("click", verificarCookies);
