@@ -1,0 +1,47 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Build GTK with MSYS2",
+            "command": "C:/msys645/ucrt64/bin/g++.exe",
+            "args": [
+                "-Wall",
+                "-Wextra",
+                "-g",
+                "main.cpp",
+                "-o",
+                "main.exe",
+                "`pkg-config --cflags --libs gtk4`"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Using MSYS2 GCC"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe build active file",
+            "command": "C:/msys645/ucrt64/bin/g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "C:/msys645/ucrt64/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "compiler: C:/msys645/ucrt64/bin/g++.exe"
+        }
+    ]
+}
