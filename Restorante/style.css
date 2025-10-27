@@ -389,7 +389,12 @@ footer {
   .close-btn {
     top: -85px;
   }
-
+  h2 {
+    font-size: 3vw;
+  }
+  p {
+    font-size: 1.4vw;
+  }
   .sobre-section {
     padding: 30px;
   }
@@ -473,6 +478,9 @@ footer {
   }
   h1 {
     font-size: 3vw;
+  }
+  h2 {
+    font-size: 2.5vw;
   }
   p {
     font-size: 2vw;
