@@ -105,6 +105,9 @@ p {
   font-size: 1.2vw; /* Tamanho do texto proporcional à largura da tela */
 }
 
+h4 {
+  margin-top: 10px;
+}
 .galeria {
   display: flex;
   flex-direction: row;
