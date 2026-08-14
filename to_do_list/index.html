@@ -40,7 +40,12 @@
                 autocomplete="email"
               />
               <label for="senha">Senha</label>
-              <input type="password" name="" id="senha" minlength="8" required autocomplete="current-password" />
+              <div class="password-wrapper">
+                <input type="password" name="" id="senha" minlength="8" required autocomplete="current-password" />
+                <button type="button" class="password-toggle" aria-label="Mostrar senha">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
 
               <button id="logar" type="button">Entrar</button>
             </div>
@@ -60,9 +65,19 @@
                 autocomplete="email"
               />
               <label for="senha1">Senha</label>
-              <input type="password" name="" id="senha1" minlength="8" required autocomplete="new-password" />
+              <div class="password-wrapper">
+                <input type="password" name="" id="senha1" minlength="8" required autocomplete="new-password" />
+                <button type="button" class="password-toggle" aria-label="Mostrar senha">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
               <label for="confirmarSenha">Confirmar Senha</label>
-              <input type="password" name="" id="confirmarSenha" minlength="8" required autocomplete="new-password" />
+              <div class="password-wrapper">
+                <input type="password" name="" id="confirmarSenha" minlength="8" required autocomplete="new-password" />
+                <button type="button" class="password-toggle" aria-label="Mostrar senha">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
 
               <button id="cadastro" type="button">Cadastrar</button>
             </div>

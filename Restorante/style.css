@@ -105,6 +105,9 @@ p {
   font-size: 1.2vw; /* Tamanho do texto proporcional à largura da tela */
 }
 
+h4 {
+  margin-top: 10px;
+}
 .galeria {
   display: flex;
   flex-direction: row;
@@ -389,7 +392,12 @@ footer {
   .close-btn {
     top: -85px;
   }
-
+  h2 {
+    font-size: 3vw;
+  }
+  p {
+    font-size: 1.4vw;
+  }
   .sobre-section {
     padding: 30px;
   }
@@ -473,6 +481,9 @@ footer {
   }
   h1 {
     font-size: 3vw;
+  }
+  h2 {
+    font-size: 2.5vw;
   }
   p {
     font-size: 2vw;

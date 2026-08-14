@@ -504,7 +504,7 @@ main {
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
 }
 
-.auth-form button[type="button"] {
+.auth-form > button[type="button"] {
   margin-top: 0.5rem;
   padding: 0.95rem 2.2rem;
   border-radius: 16px;
@@ -518,19 +518,54 @@ main {
   width: 100%;
 }
 
-.auth-form button[type="button"]:hover {
+.auth-form > button[type="button"]:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-glow);
 }
 
-#login-form button[type="button"] {
+#login-form > button[type="button"] {
   background: var(--accent-gradient);
   color: #0f172a;
 }
 
-#cadastro-form button[type="button"] {
+#cadastro-form > button[type="button"] {
   background: var(--highlight-gradient);
   color: #0f172a;
+}
+
+.auth-form .password-wrapper {
+  position: relative;
+}
+
+.auth-form .password-wrapper input {
+  width: 100%;
+  padding-right: 3rem;
+}
+
+.auth-form .password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.4rem;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin: 0;
+  padding: 0.4rem;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--text-soft);
+  cursor: pointer;
+  box-shadow: none;
+  transition: var(--transition-soft);
+}
+
+.auth-form .password-toggle:hover {
+  color: var(--text);
+  transform: translateY(-50%);
+  box-shadow: none;
 }
 
 .auth-form .section-title {
