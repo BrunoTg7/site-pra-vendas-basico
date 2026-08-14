@@ -14,9 +14,6 @@
   <body>
     <header>
       <h1>To Do List</h1>
-      <button id="sair">
-        <img src="icon_for_to-do_list-removebg-preview.png" alt="" />
-      </button>
     </header>
     <main>
       <div class="container-2">
@@ -32,30 +29,29 @@
         </div>
       </div>
     </main>
-    <head>
-      <div class="overlay" id="overlay">
-        <div class="cookies-msg" id="cookies-msg">
-          <div class="cookies-txt">
-            <p>
-              Este site foi desenvolvido para ajudar você a organizar suas
-              listas de tarefas de forma prática e personalizada. O sistema de
-              login não armazena seus dados em servidores externos; ele serve
-              apenas para validar sua identidade e manter as informações salvas
-              no <strong>localStorage</strong> do seu próprio navegador. Dessa
-              forma, seus dados permanecem protegidos e acessíveis somente a
-              você.<br />
-              Vale lembrar que, ao limpar o cache do navegador, as informações
-              armazenadas temporariamente serão apagadas. Isso garante total
-              controle sobre sua privacidade e seus dados.
-            </p>
+    <div class="overlay" id="overlay">
+      <div class="cookies-msg" id="cookies-msg">
+        <div class="cookies-txt">
+          <p>
+            Este site foi desenvolvido para ajudar você a organizar suas
+            listas de tarefas de forma prática e personalizada. O sistema de
+            login não armazena seus dados em servidores externos; ele serve
+            apenas para validar sua identidade e manter as informações salvas
+            no <strong>localStorage</strong> do seu próprio navegador. Dessa
+            forma, seus dados permanecem protegidos e acessíveis somente a
+            você.<br />
+            Vale lembrar que, ao limpar o cache do navegador, as informações
+            armazenadas temporariamente serão apagadas. Isso garante total
+            controle sobre sua privacidade e seus dados.
+          </p>
 
-            <div class="cookies-btn">
+<div class="cookies-btn">
               <button class="cookies-btn2">Aceito</button>
             </div>
           </div>
         </div>
       </div>
-    </head>
-    <script src="index.js"></script>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

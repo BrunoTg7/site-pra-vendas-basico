@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <link
+      rel="shortcut icon"
+      href="/assets/icon_for_to-do_list-removebg-preview%20(1)-ORgZIh4o.png"
+      type="image/x-icon"
+    />
+    <script type="module" crossorigin src="/assets/main-BK37lNv7.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-DeMZYBcL.css">
+  </head>
+  <body>
+    <header>
+      <h1>To Do list</h1>
+    </header>
+    <main>
+      <div class="container">
+        <div class="auth-card">
+          <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login">Entrar</button>
+            <button class="auth-tab" data-tab="cadastro">Cadastrar</button>
+            <span class="auth-tab-indicator"></span>
+          </div>
+          <div class="auth-forms">
+            <div class="auth-form active" id="login-form">
+              <div class="section-header">
+                <h2 class="section-title">Bem-vindo de volta</h2>
+                <p class="helper-text">
+                  Acesse sua conta para gerenciar suas tarefas.
+                </p>
+              </div>
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="seu@email.com"
+                required
+                autocomplete="email"
+              />
+              <label for="senha">Senha</label>
+              <input type="password" name="" id="senha" minlength="8" required autocomplete="current-password" />
+
+              <button id="logar" type="button">Entrar</button>
+            </div>
+            <div class="auth-form" id="cadastro-form">
+              <div class="section-header">
+                <h2 class="section-title">Criar sua conta</h2>
+                <p class="helper-text">
+                  Cadastre-se para começar a organizar suas tarefas.
+                </p>
+              </div>
+              <label for="email1">Email</label>
+              <input
+                type="email"
+                id="email1"
+                placeholder="seu@email.com"
+                required
+                autocomplete="email"
+              />
+              <label for="senha1">Senha</label>
+              <input type="password" name="" id="senha1" minlength="8" required autocomplete="new-password" />
+              <label for="confirmarSenha">Confirmar Senha</label>
+              <input type="password" name="" id="confirmarSenha" minlength="8" required autocomplete="new-password" />
+
+              <button id="cadastro" type="button">Cadastrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="overlay" id="overlay">
+      <div class="cookies-msg" id="cookies-msg">
+        <div class="cookies-txt">
+          <p>
+            Este site foi desenvolvido para ajudar você a organizar suas
+            listas de tarefas de forma prática e personalizada. O sistema de
+            login não armazena seus dados em servidores externos; ele serve
+            apenas para validar sua identidade e manter as informações salvas
+            no <strong>localStorage</strong> do seu próprio navegador. Dessa
+            forma, seus dados permanecem protegidos e acessíveis somente a
+            você.<br />
+            Vale lembrar que, ao limpar o cache do navegador, as informações
+            armazenadas temporariamente serão apagadas. Isso garante total
+            controle sobre sua privacidade e seus dados.
+          </p>
+
+<div class="cookies-btn">
+              <button class="cookies-btn2">Aceito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

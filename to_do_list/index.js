@@ -1,5 +1,89 @@
 let logoutTimer;
 
+// Constants for localStorage keys
+const STORAGE_KEYS = {
+  USER_CREDENTIALS: "user_credentials_v1",
+  USER_TASKS: "user_tasks_v1",
+  LOGIN_TIME: "login_time",
+  COOKIE_CONSENT: "cookie_consent",
+};
+
+// Password hashing utilities using Web Crypto API
+async function hashPassword(password) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password);
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw",
+    data,
+    { name: "PBKDF2" },
+    false,
+    ["deriveBits"]
+  );
+  const hash = await crypto.subtle.deriveBits(
+    {
+      name: "PBKDF2",
+      salt,
+      iterations: 100000,
+      hash: "SHA-256",
+    },
+    keyMaterial,
+    256
+  );
+  const hashArray = new Uint8Array(hash);
+  const combined = new Uint8Array(salt.length + hashArray.length);
+  combined.set(salt);
+  combined.set(hashArray, salt.length);
+  return btoa(String.fromCharCode(...combined));
+}
+
+async function verifyPassword(password, storedHash) {
+  try {
+    const combined = new Uint8Array(
+      atob(storedHash)
+        .split("")
+        .map((c) => c.charCodeAt(0))
+    );
+    const salt = combined.slice(0, 16);
+    const storedHashBytes = combined.slice(16);
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const keyMaterial = await crypto.subtle.importKey(
+      "raw",
+      data,
+      { name: "PBKDF2" },
+      false,
+      ["deriveBits"]
+    );
+    const hash = await crypto.subtle.deriveBits(
+      {
+        name: "PBKDF2",
+        salt,
+        iterations: 100000,
+        hash: "SHA-256",
+      },
+      keyMaterial,
+      256
+    );
+    const hashArray = new Uint8Array(hash);
+    return hashArray.length === storedHashBytes.length &&
+      hashArray.every((val, i) => val === storedHashBytes[i]);
+  } catch {
+    return false;
+  }
+}
+
+// Password validation
+function validatePassword(password) {
+  const errors = [];
+  if (password.length < 8) errors.push("Mínimo 8 caracteres");
+  if (!/[A-Z]/.test(password)) errors.push("Pelo menos 1 maiúscula");
+  if (!/[a-z]/.test(password)) errors.push("Pelo menos 1 minúscula");
+  if (!/[0-9]/.test(password)) errors.push("Pelo menos 1 número");
+  if (!/[^A-Za-z0-9]/.test(password)) errors.push("Pelo menos 1 símbolo");
+  return { valid: errors.length === 0, errors };
+}
+
 // Quando o DOM estiver carregado
 document.addEventListener("DOMContentLoaded", () => {
   verificarTempoDeSessao();
@@ -10,18 +94,31 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Função para realizar o cadastro
-function cadastroSalvo() {
+async function cadastroSalvo() {
   console.log("Botão cadastro clicado");
   const senha = document.getElementById("senha1").value;
+  const confirmarSenha = document.getElementById("confirmarSenha")?.value || "";
   const email = document.getElementById("email1").value;
-  console.log("Email cadastrado:", email, "Senha cadastrada:", senha);
+
+  const validation = validatePassword(senha);
+  if (!validation.valid) {
+    alert("Senha fraca:\n- " + validation.errors.join("\n- "));
+    return;
+  }
+
+  if (senha !== confirmarSenha) {
+    alert("As senhas não coincidem");
+    return;
+  }
+
+  const hashedPassword = await hashPassword(senha);
 
   const cadastro = {
-    senha: senha,
+    senha: hashedPassword,
     email: email,
   };
-  localStorage.setItem("5s51d2a30as5f", btoa(JSON.stringify(cadastro)));
-  console.log("Dados salvos no localStorage");
+  localStorage.setItem(STORAGE_KEYS.USER_CREDENTIALS, btoa(JSON.stringify(cadastro)));
+  console.log("Dados salvos no localStorage (hashed)");
 
   alert("Cadastro realizado com sucesso!");
 
@@ -29,25 +126,27 @@ function cadastroSalvo() {
   window.location.href = "tarefas.html";
 }
 
-function loginSalvo() {
+async function loginSalvo() {
   console.log("Botão login clicado");
   const senha = document.getElementById("senha").value;
   const email = document.getElementById("email").value;
-  console.log("Email digitado:", email, "Senha digitada:", senha);
+  console.log("Email digitado:", email);
 
   let login;
   try {
-    login = JSON.parse(atob(localStorage.getItem("5s51d2a30as5f"))) || {};
+    const stored = localStorage.getItem(STORAGE_KEYS.USER_CREDENTIALS);
+    login = stored ? JSON.parse(atob(stored)) : {};
   } catch (e) {
     console.error("Erro ao decodificar os dados do login:", e);
     login = {};
   }
-  console.log("Dados salvos no localStorage:", login);
 
-  if (login.email === email && login.senha === senha) {
+  const passwordMatch = await verifyPassword(senha, login.senha || "");
+
+  if (login.email === email && passwordMatch) {
     console.log("Login válido, redirecionando...");
     const now = new Date();
-    localStorage.setItem("loginTime", now.toISOString());
+    localStorage.setItem(STORAGE_KEYS.LOGIN_TIME, now.toISOString());
 
     alert("Login realizado com sucesso!");
 
@@ -61,8 +160,8 @@ function loginSalvo() {
 
 // Função para verificar se a sessão está válida
 function verificarTempoDeSessao() {
-  const loginTime = localStorage.getItem("loginTime");
-  const login = localStorage.getItem("5s51d2a30as5f");
+  const loginTime = localStorage.getItem(STORAGE_KEYS.LOGIN_TIME);
+  const login = localStorage.getItem(STORAGE_KEYS.USER_CREDENTIALS);
 
   if (login && loginTime) {
     const loginDate = new Date(loginTime);
@@ -108,7 +207,7 @@ function deslogarUsuario() {
     tarefaEl.style.display = "none";
   }
 
-  localStorage.removeItem("loggedUser");
+  localStorage.removeItem(STORAGE_KEYS.LOGIN_TIME);
 
   if (window.location.pathname.endsWith("tarefas.html")) {
     window.location.href = "index.html";
@@ -246,7 +345,7 @@ const tarefa = () => {
       }
 
       let rawDataString =
-        localStorage.getItem("gjs5s4c1a24ss4d") || btoa(JSON.stringify({}));
+        localStorage.getItem(STORAGE_KEYS.USER_TASKS) || btoa(JSON.stringify({}));
       let storage = JSON.parse(atob(rawDataString)) || {};
 
       if (!storage[email]) {
@@ -265,7 +364,7 @@ const tarefa = () => {
         });
       });
 
-      localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
+      localStorage.setItem(STORAGE_KEYS.USER_TASKS, btoa(JSON.stringify(storage)));
 
       console.log(
         `Tarefas salvas (${taskValues.length}) para ${email} no dia ${dateValue}`
@@ -315,8 +414,8 @@ function verificarListaVazia() {
 }
 
 function obterContextoDeTarefas() {
-  const rawDataString = localStorage.getItem("gjs5s4c1a24ss4d");
-  const loginDataString = localStorage.getItem("5s51d2a30as5f");
+  const rawDataString = localStorage.getItem(STORAGE_KEYS.USER_TASKS);
+  const loginDataString = localStorage.getItem(STORAGE_KEYS.USER_CREDENTIALS);
 
   if (!rawDataString || !loginDataString) {
     console.warn("Contexto de tarefas indisponível no localStorage.");
@@ -681,7 +780,7 @@ function moverOuCopiarTarefas(date, targetISO, { copy = false } = {}) {
   }
 
   const encoded = btoa(JSON.stringify(rawData));
-  localStorage.setItem("gjs5s4c1a24ss4d", encoded);
+  localStorage.setItem(STORAGE_KEYS.USER_TASKS, encoded);
 
   return {
     success: true,
@@ -693,7 +792,7 @@ function moverOuCopiarTarefas(date, targetISO, { copy = false } = {}) {
 }
 
 function removerData(date) {
-  let rawDataString = localStorage.getItem("gjs5s4c1a24ss4d");
+  let rawDataString = localStorage.getItem(STORAGE_KEYS.USER_TASKS);
   if (!rawDataString) {
     console.warn("Nenhum dado encontrado no localStorage.");
     return;
@@ -702,7 +801,7 @@ function removerData(date) {
   try {
     let storage = JSON.parse(atob(rawDataString)) || {};
     const loginData =
-      JSON.parse(atob(localStorage.getItem("5s51d2a30as5f"))) || {};
+      JSON.parse(atob(localStorage.getItem(STORAGE_KEYS.USER_CREDENTIALS))) || {};
     const email = loginData.email;
 
     if (email && storage[email]) {
@@ -713,7 +812,7 @@ function removerData(date) {
         delete storage[email];
       }
 
-      localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
+      localStorage.setItem(STORAGE_KEYS.USER_TASKS, btoa(JSON.stringify(storage)));
       console.log(`Todas as tarefas de ${date} foram removidas.`);
     } else {
       console.warn(`Nenhuma tarefa encontrada para ${email} na data ${date}.`);
@@ -727,7 +826,7 @@ function removerData(date) {
 }
 
 function salvarTarefasNoLocalStorage(date, tasks) {
-  const rawDataString = localStorage.getItem("gjs5s4c1a24ss4d");
+  const rawDataString = localStorage.getItem(STORAGE_KEYS.USER_TASKS);
   if (!rawDataString) {
     console.warn("Nenhum dado encontrado no localStorage.");
     return;
@@ -736,12 +835,12 @@ function salvarTarefasNoLocalStorage(date, tasks) {
   try {
     let storage = JSON.parse(atob(rawDataString)) || {};
     const loginData =
-      JSON.parse(atob(localStorage.getItem("5s51d2a30as5f"))) || {};
+      JSON.parse(atob(localStorage.getItem(STORAGE_KEYS.USER_CREDENTIALS))) || {};
     const email = loginData.email;
 
     if (email && storage[email]) {
       storage[email][date] = tasks; // Atualiza as tarefas daquela data
-      localStorage.setItem("gjs5s4c1a24ss4d", btoa(JSON.stringify(storage)));
+      localStorage.setItem(STORAGE_KEYS.USER_TASKS, btoa(JSON.stringify(storage)));
       console.log(`Tarefas do dia ${date} foram atualizadas para ${email}`);
     } else {
       console.warn(`Nenhum espaço encontrado para o email ${email}`);
@@ -761,11 +860,11 @@ if (sairBtn) {
 var div = document.getElementById("overlay");
 
 function verificarCookies() {
-  localStorage.lgbd = "sim";
+  localStorage.setItem("cookieConsent", "accepted");
   div.classList.remove("amostrar");
 }
 
-if (localStorage.lgbd === "a") {
+if (localStorage.getItem("cookieConsent") === "accepted") {
   div.classList.remove("amostrar");
 } else {
   div.classList.add("amostrar");

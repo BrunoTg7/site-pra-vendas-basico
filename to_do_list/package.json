@@ -1,0 +1,21 @@
+{
+  "name": "to_do_list",
+  "version": "1.0.0",
+  "description": "A modern to-do list application with secure authentication",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext ts",
+    "format": "prettier --write \"src/**/*.{ts,html,css}\""
+  },
+  "keywords": ["todo", "tasks", "productivity"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1"
+  }
+}
