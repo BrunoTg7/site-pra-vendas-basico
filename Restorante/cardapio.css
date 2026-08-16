@@ -1,0 +1,332 @@
+/* ============================================
+   PAGE HERO (HERO INTERNO)
+   ============================================ */
+.page-hero {
+  position: relative;
+  height: 45vh;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: var(--escuro);
+}
+
+.page-hero__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('./img/restorante/2513150_353917-PAXE6G-291__1_-removebg-preview\ \(1\).png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+}
+
+.page-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(61, 15, 16, 0.75) 0%,
+    rgba(26, 26, 26, 0.9) 100%
+  );
+}
+
+.page-hero__content {
+  position: relative;
+  z-index: 2;
+}
+
+.page-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  color: var(--branco);
+  line-height: 1.1;
+}
+
+/* ============================================
+   FILTROS
+   ============================================ */
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.65rem 1.75rem;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--texto);
+  background: var(--bege);
+  border: 2px solid transparent;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.filter-btn:hover {
+  border-color: var(--borgonha);
+  color: var(--borgonha);
+}
+
+.filter-btn.active {
+  background: var(--borgonha);
+  color: var(--branco);
+  border-color: var(--borgonha);
+}
+
+/* ============================================
+   GRID CARDÁPIO
+   ============================================ */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   CARD ITEM
+   ============================================ */
+.menu-item {
+  position: relative;
+  background: var(--branco);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+.menu-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(92, 26, 27, 0.15);
+}
+
+.menu-item.hidden {
+  display: none;
+}
+
+/* Imagem */
+.menu-item__img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.menu-item__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-item:hover .menu-item__img {
+  transform: scale(1.1);
+}
+
+/* Overlay gradiente na imagem */
+.menu-item__img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(61, 15, 16, 0.6) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.menu-item:hover .menu-item__img-overlay {
+  opacity: 1;
+}
+
+/* Badge categoria */
+.menu-item__badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--branco);
+  background: var(--borgonha);
+  border-radius: 50px;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+/* Ícone de ver no cardápio */
+.menu-item__eye {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 44px;
+  height: 44px;
+  background: var(--dourado);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.7) translateY(10px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+
+.menu-item:hover .menu-item__eye {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.menu-item__eye span {
+  font-size: 1.1rem;
+  color: var(--escuro);
+  line-height: 1;
+}
+
+/* Conteúdo */
+.menu-item__info {
+  padding: 1.35rem 1.5rem 1.5rem;
+  position: relative;
+}
+
+/* Linha decorativa dourada */
+.menu-item__info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--dourado), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.menu-item:hover .menu-item__info::before {
+  opacity: 1;
+}
+
+.menu-item__name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--borgonha-dark);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.menu-item:hover .menu-item__name {
+  color: var(--borgonha);
+}
+
+.menu-item__desc {
+  font-size: 1rem;
+  color: #777;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Preço e CTA na mesma linha */
+.menu-item__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-item__price {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--borgonha);
+}
+
+.menu-item__cta {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-item:hover .menu-item__cta {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.menu-item__cta-arrow {
+  transition: transform 0.3s ease;
+}
+
+.menu-item:hover .menu-item__cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ============================================
+   RESPONSIVE CARDÁPIO
+   ============================================ */
+@media (max-width: 768px) {
+  .menu-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .menu-item__img-wrapper {
+    height: 200px;
+  }
+
+  .filters {
+    gap: 0.5rem;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-item__img-wrapper {
+    height: 220px;
+  }
+
+  .menu-item__info {
+    padding: 1.15rem 1.25rem 1.25rem;
+  }
+
+  .menu-item__cta {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

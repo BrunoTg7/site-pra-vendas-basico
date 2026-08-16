@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#5C1A1B" />
+    <meta name="author" content="Restorante" />
+    <title>Contato — Restorante</title>
+    <meta name="description" content="Entre em contato com o Restorante. Faça sua reserva, envie uma mensagem ou nos encontre. Telefone, WhatsApp e formulário de contato." />
+    <meta name="keywords" content="contato, reserva, telefone, whatsapp, endereço, horário, formulário" />
+    <meta property="og:title" content="Contato — Restorante" />
+    <meta property="og:description" content="Faça sua reserva ou entre em contato conosco. Estamos prontos para recebê-lo." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./img/restorante/images-removebg-preview.png" />
+    <link rel="icon" type="image/png" href="./img/restorante/images-removebg-preview.png" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="contato.css" />
+  </head>
+  <body>
+
+    <!-- HEADER -->
+    <header class="header scrolled" id="header">
+      <div class="header__logo">
+        <a href="index.html">
+          <img src="./img/restorante/images-removebg-preview.png" alt="Restorante" />
+        </a>
+      </div>
+      <nav class="header__nav" id="nav">
+        <a href="index.html">Home</a>
+        <a href="cardapio.html">Cardápio</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html" class="active">Contato</a>
+      </nav>
+      <div class="header__social">
+        <a href="https://www.instagram.com/bruno_tg9/" target="_blank" class="instagram-btn">
+          <img src="./img/restorante/instagram-svgrepo-com (1).png" alt="" />
+          <span>Instagram</span>
+        </a>
+      </div>
+      <button class="header__menu-toggle" id="menuToggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <!-- HERO INTERNO -->
+    <section class="page-hero">
+      <div class="page-hero__bg"></div>
+      <div class="page-hero__overlay"></div>
+      <div class="page-hero__content">
+        <span class="section__label">Fale conosco</span>
+        <h1 class="page-hero__title">Contato</h1>
+        <div class="section__divider"></div>
+      </div>
+    </section>
+
+    <!-- CONTEÚDO CONTATO -->
+    <section class="section">
+      <div class="contact-wrapper">
+
+        <!-- FORMULÁRIO -->
+        <div class="contact-form reveal">
+          <h2 class="contact-form__title">Envie sua mensagem</h2>
+          <p class="contact-form__desc">Preencha o formulário abaixo e entraremos em contato o mais breve possível.</p>
+          <form id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="nome">Nome completo</label>
+              <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="telefone">Telefone</label>
+              <input type="tel" id="telefone" name="telefone" placeholder="(79) 99999-9999" />
+            </div>
+            <div class="form-group">
+              <label for="mensagem">Mensagem</label>
+              <textarea id="mensagem" name="mensagem" rows="5" placeholder="Como podemos ajudar?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full">Enviar Mensagem</button>
+          </form>
+          <div class="form-success" id="formSuccess">
+            <div class="form-success__icon">✓</div>
+            <h3>Mensagem enviada!</h3>
+            <p>Obrigado pelo contato. Responderemos em breve.</p>
+          </div>
+        </div>
+
+        <!-- INFO -->
+        <div class="contact-info reveal reveal-delay-1">
+          <div class="contact-info__card">
+            <div class="contact-info__icon">📍</div>
+            <h3>Endereço</h3>
+            <p>Rua da Gastronomia, 123<br />Centro, Aracaju - SE<br />CEP: 49000-000</p>
+          </div>
+
+          <div class="contact-info__card">
+            <div class="contact-info__icon">📞</div>
+            <h3>Telefone</h3>
+            <p>(79) 1234-5678</p>
+            <p>(79) 91234-5678</p>
+          </div>
+
+          <div class="contact-info__card">
+            <div class="contact-info__icon">🕐</div>
+            <h3>Horário de Funcionamento</h3>
+            <p>Segunda a Sexta: 11h - 23h</p>
+            <p>Sábado: 11h - 00h</p>
+            <p>Domingo: 11h - 22h</p>
+          </div>
+
+          <div class="contact-info__card">
+            <div class="contact-info__icon">✉️</div>
+            <h3>E-mail</h3>
+            <p>contato@restorante.com</p>
+          </div>
+
+          <a href="https://wa.me/5579912345678" target="_blank" class="btn btn--whatsapp">
+            📱 Falar no WhatsApp
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MAPA PLACEHOLDER -->
+    <section class="section section--bege">
+      <div class="section__header reveal">
+        <span class="section__label">Localização</span>
+        <h2 class="section__title">Como Chegar</h2>
+        <div class="section__divider"></div>
+      </div>
+      <div class="map-wrapper reveal">
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.5!2d-37.07!3d-10.91!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDU0JzM2LjAiUyAzN8KwMDQnMTIuMCJX!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+            width="100%" 
+            height="450" 
+            style="border:0; border-radius: var(--radius-lg);" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Localização do Restorante">
+          </iframe>
+        </div>
+        <div class="map-info">
+          <p class="map-info__address">📍 Rua da Gastronomia, 123 - Centro, Aracaju - SE</p>
+          <a href="https://maps.google.com/?q=Rua+da+Gastronomia+123+Centro+Aracaju+SE" target="_blank" class="btn btn--primary">
+            Abrir no Google Maps
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="./img/restorante/images-removebg-preview.png" alt="Restorante" />
+          <p>Tradição e sabor em cada prato. Uma experiência gastronômica quecelebra os melhores sabores da culinária brasileira.</p>
+          <div class="footer__social">
+            <a href="https://www.instagram.com/bruno_tg9/" target="_blank" aria-label="Instagram">
+              <img src="./img/restorante/instagram-svgrepo-com (1).png" alt="Instagram" />
+            </a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4>Contato</h4>
+          <p>📞 (79) 1234-5678</p>
+          <p>📱 WhatsApp: (79) 91234-5678</p>
+          <p>✉️ contato@restorante.com</p>
+        </div>
+        <div class="footer__col">
+          <h4>Horário</h4>
+          <p>Seg - Sex: 11h - 23h</p>
+          <p>Sábado: 11h - 00h</p>
+          <p>Domingo: 11h - 22h</p>
+        </div>
+        <div class="footer__col">
+          <h4>Links Rápidos</h4>
+          <a href="index.html">Home</a>
+          <a href="cardapio.html">Cardápio</a>
+          <a href="sobre.html">Sobre Nós</a>
+          <a href="contato.html">Contato</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2025 Restorante. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <script src="contato.js"></script>
+  </body>
+</html>

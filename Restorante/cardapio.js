@@ -86,7 +86,6 @@ menuToggle.addEventListener("click", () => {
   nav.classList.toggle("open");
 });
 
-// Fechar menu ao clicar em link
 nav.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", () => {
     menuToggle.classList.remove("active");
@@ -94,7 +93,6 @@ nav.querySelectorAll("a").forEach((link) => {
   });
 });
 
-// Fechar menu ao clicar fora
 document.addEventListener("click", (e) => {
   if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
     menuToggle.classList.remove("active");
@@ -116,36 +114,72 @@ const revealObserver = new IntersectionObserver(
       }
     });
   },
-  {
-    threshold: 0.15,
-    rootMargin: "0px 0px -50px 0px",
-  }
+  { threshold: 0.15 }
 );
 
 revealElements.forEach((el) => revealObserver.observe(el));
 
 // ============================================
-// GALERIA
+// FILTROS
 // ============================================
-const galleryGrid = document.getElementById("galleryGrid");
+const filterBtns = document.querySelectorAll(".filter-btn");
+const menuGrid = document.getElementById("menuGrid");
+let filtroAtual = "todos";
 
-function criarCardsGaleria() {
-  pratos.forEach((prato) => {
-    const card = document.createElement("div");
-    card.classList.add("gallery-card");
-    card.setAttribute("data-id", prato.id);
+filterBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    filterBtns.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    filtroAtual = btn.dataset.filter;
+    filtrarPratos();
+  });
+});
 
-    card.innerHTML = `
-      <img class="gallery-card__img" src="${prato.url}" alt="${prato.nome}" loading="lazy" />
-      <div class="gallery-card__overlay">
-        <span class="gallery-card__name">${prato.nome}</span>
-        <span class="gallery-card__price">${prato.valor}</span>
+function filtrarPratos() {
+  const itens = menuGrid.querySelectorAll(".menu-item");
+  itens.forEach((item, index) => {
+    const categoria = item.dataset.categoria;
+    const deveMostrar = filtroAtual === "todos" || categoria === filtroAtual;
+
+    if (deveMostrar) {
+      item.classList.remove("hidden");
+      item.style.animation = `fadeInUp 0.4s ease forwards ${index * 0.05}s`;
+    } else {
+      item.classList.add("hidden");
+    }
+  });
+}
+
+// ============================================
+// GRID CARDÁPIO
+// ============================================
+function criarItensCardapio() {
+  pratos.forEach((prato, index) => {
+    const item = document.createElement("div");
+    item.classList.add("menu-item");
+    item.setAttribute("data-categoria", prato.categoria);
+    item.style.opacity = "0";
+    item.style.animation = `fadeInUp 0.5s ease forwards ${index * 0.08}s`;
+
+    item.innerHTML = `
+      <div class="menu-item__img-wrapper">
+        <img class="menu-item__img" src="${prato.url}" alt="${prato.nome}" loading="lazy" />
+        <div class="menu-item__img-overlay"></div>
+        <span class="menu-item__badge">${prato.categoria}</span>
+        <div class="menu-item__eye"><span>+</span></div>
       </div>
-      <div class="gallery-card__action"><span>+</span></div>
+      <div class="menu-item__info">
+        <h3 class="menu-item__name">${prato.nome}</h3>
+        <p class="menu-item__desc">${prato.descricao}</p>
+        <div class="menu-item__footer">
+          <span class="menu-item__price">${prato.valor}</span>
+          <span class="menu-item__cta">Ver detalhes <span class="menu-item__cta-arrow">→</span></span>
+        </div>
+      </div>
     `;
 
-    card.addEventListener("click", () => abrirModal(prato));
-    galleryGrid.appendChild(card);
+    item.addEventListener("click", () => abrirModal(prato));
+    menuGrid.appendChild(item);
   });
 }
 
@@ -185,20 +219,36 @@ document.addEventListener("keydown", (e) => {
 });
 
 // ============================================
+// ANIMAÇÕES
+// ============================================
+const style = document.createElement("style");
+style.textContent = `
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+document.head.appendChild(style);
+
+// ============================================
 // INICIALIZAÇÃO
 // ============================================
 document.addEventListener("DOMContentLoaded", () => {
   const splash = document.getElementById("splash");
 
-  // Animação do splash: espera 2.2s e depois esconde
-  setTimeout(() => {
-    splash.classList.add("hidden");
-    document.body.style.overflow = "";
-  }, 2200);
+  if (splash) {
+    document.body.style.overflow = "hidden";
+    setTimeout(() => {
+      splash.classList.add("hidden");
+      document.body.style.overflow = "";
+    }, 2200);
+  }
 
-  // Bloqueia scroll enquanto splash está ativo
-  document.body.style.overflow = "hidden";
-
-  criarCardsGaleria();
-  handleHeaderScroll();
+  criarItensCardapio();
 });

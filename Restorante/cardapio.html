@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#5C1A1B" />
+    <meta name="author" content="Restorante" />
+    <title>Cardápio — Restorante</title>
+    <meta name="description" content="Conheça nosso cardápio completo: entradas, pratos principais e sobremesas preparados com ingredientes frescos e de alta qualidade." />
+    <meta name="keywords" content="cardápio, menu, pratos, entradas, sobremesas, feijoada, moqueca, salmão, filé mignon" />
+    <meta property="og:title" content="Cardápio — Restorante" />
+    <meta property="og:description" content="Pratos preparados com ingredientes frescos e de alta qualidade. Conheça nosso cardápio completo." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./img/restorante/images-removebg-preview.png" />
+    <link rel="icon" type="image/png" href="./img/restorante/images-removebg-preview.png" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="cardapio.css" />
+  </head>
+  <body>
+
+    <!-- HEADER -->
+    <header class="header scrolled" id="header">
+      <div class="header__logo">
+        <a href="index.html">
+          <img src="./img/restorante/images-removebg-preview.png" alt="Restorante" />
+        </a>
+      </div>
+      <nav class="header__nav" id="nav">
+        <a href="index.html">Home</a>
+        <a href="cardapio.html" class="active">Cardápio</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+      <div class="header__social">
+        <a href="https://www.instagram.com/bruno_tg9/" target="_blank" class="instagram-btn">
+          <img class="w-5 h-5" src="./img/restorante/instagram-svgrepo-com (1).png" alt="" />
+          <span>Instagram</span>
+        </a>
+      </div>
+      <button class="header__menu-toggle" id="menuToggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <!-- HERO PEQUENO -->
+    <section class="page-hero">
+      <div class="page-hero__bg"></div>
+      <div class="page-hero__overlay"></div>
+      <div class="page-hero__content">
+        <span class="section__label">Delícia em Cada Mordida</span>
+        <h1 class="page-hero__title">Nosso Cardápio</h1>
+        <div class="section__divider"></div>
+      </div>
+    </section>
+
+    <!-- FILTROS -->
+    <section class="section">
+      <div class="filters reveal" id="filters">
+        <button class="filter-btn active" data-filter="todos">Todos</button>
+        <button class="filter-btn" data-filter="Entradas">Entradas</button>
+        <button class="filter-btn" data-filter="Pratos Principais">Pratos Principais</button>
+        <button class="filter-btn" data-filter="Sobremesas">Sobremesas</button>
+      </div>
+
+      <!-- GRID CARDÁPIO -->
+      <div class="menu-grid" id="menuGrid"></div>
+    </section>
+
+    <!-- MODAL DETALHES -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <button class="modal__close" id="modalClose">✕</button>
+        <img class="modal__img" id="modalImg" src="" alt="" />
+        <div class="modal__info">
+          <span class="modal__category" id="modalCategory"></span>
+          <h2 class="modal__name" id="modalName"></h2>
+          <p class="modal__desc" id="modalDesc"></p>
+          <span class="modal__price" id="modalPrice"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="section section--dark text-center">
+      <div class="reveal">
+        <span class="section__label">Gostou?</span>
+        <h2 class="section__title" style="color: var(--branco);">Faça Sua Reserva</h2>
+        <div class="section__divider"></div>
+        <p class="section__desc" style="margin-bottom: 2rem;">Garanta sua mesa e desfrute de uma experiência gastronômica inesquecível.</p>
+        <a href="contato.html" class="btn btn--outline">Reservar Mesa</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="./img/restorante/images-removebg-preview.png" alt="Restorante" />
+          <p>Tradição e sabor em cada prato. Uma experiência gastronômica quecelebra os melhores sabores da culinária brasileira.</p>
+          <div class="footer__social">
+            <a href="https://www.instagram.com/bruno_tg9/" target="_blank" aria-label="Instagram">
+              <img  src="./img/restorante/instagram-svgrepo-com (1).png" alt="Instagram" />
+            </a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4>Contato</h4>
+          <p>📞 (79) 1234-5678</p>
+          <p>📱 WhatsApp: (79) 91234-5678</p>
+          <p>✉️ contato@restorante.com</p>
+        </div>
+        <div class="footer__col">
+          <h4>Horário</h4>
+          <p>Seg - Sex: 11h - 23h</p>
+          <p>Sábado: 11h - 00h</p>
+          <p>Domingo: 11h - 22h</p>
+        </div>
+        <div class="footer__col">
+          <h4>Links Rápidos</h4>
+          <a href="index.html">Home</a>
+          <a href="cardapio.html">Cardápio</a>
+          <a href="sobre.html">Sobre Nós</a>
+          <a href="contato.html">Contato</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2025 Restorante. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <script src="cardapio.js"></script>
+  </body>
+</html>

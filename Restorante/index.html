@@ -3,75 +3,200 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Restorante</title>
-    <link
-      rel="stylesheet"
-      href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
-    />
-
+    <meta name="theme-color" content="#5C1A1B" />
+    <meta name="author" content="Restorante" />
+    <title>Restorante — Tradição e Sabor</title>
+    <meta name="description" content="Restorante - Tradição e sabor em cada prato. Conheça nosso cardápio, faça reservas e desfrute da melhor experiência gastronômica da cidade." />
+    <meta name="keywords" content="restaurante, comida brasileira, gastronomia, cardápio, reservas, almoço, jantar" />
+    <meta property="og:title" content="Restorante — Tradição e Sabor" />
+    <meta property="og:description" content="Tradição e sabor em cada prato. Conheça nosso cardápio e faça sua reserva." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./img/restorante/images-removebg-preview.png" />
+    <link rel="icon" type="image/png" href="./img/restorante/images-removebg-preview.png" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>
-      <div class="logo">
-        <a href="/"
-          ><img src="./img/restorante/images-removebg-preview.png" alt=""
-        /></a>
+
+    <!-- SPLASH SCREEN -->
+    <div class="splash" id="splash">
+      <div class="splash__flor-left">
+        <img src="./img/restorante/floral.png" alt="" />
       </div>
-      <div class="instagram">
-        <a href="https://www.instagram.com/bruno_tg9/"
-          ><img src="./img/restorante/instagram-svgrepo-com (1).png" alt=""
-        /></a>
+      <div class="splash__flor-right">
+        <img src="./img/restorante/floral-design-icon-flower-vines-and-leaves-right-border-icon-art-icon-p8R8NbfM-removebg-preview.png" alt="" />
       </div>
+      <div class="splash__content">
+        <img src="./img/restorante/images-removebg-preview.png" class="splash__logo" alt="Restorante" />
+        <div class="splash__divider"></div>
+        <p class="splash__text">Tradição e Sabor</p>
+      </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+      <div class="header__logo">
+        <a href="index.html">
+          <img src="./img/restorante/images-removebg-preview.png" alt="Restorante" />
+        </a>
+      </div>
+      <nav class="header__nav" id="nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="cardapio.html">Cardápio</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+      <div class="header__social">
+        <a href="https://www.instagram.com/bruno_tg9/" target="_blank" class="instagram-btn">
+          <img src="./img/restorante/instagram-svgrepo-com (1).png" alt="" />
+          <span>Instagram</span>
+        </a>
+      </div>
+      <button class="header__menu-toggle" id="menuToggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </header>
-    <main>
-      <div class="entrada">
-        <img
-          src="./img/restorante/floral-design-icon-flower-vines-and-leaves-right-border-icon-art-icon-p8R8NbfM-removebg-preview.png"
-          class="flor"
-          alt=""
-        />
-        <img src="./img/restorante/floral.png" class="flor2" alt="" />
-        <img
-          src="./img/restorante/2513150_353917-PAXE6G-291__1_-removebg-preview (1).png"
-          class="molde"
-          alt=""
-        />
-        <div class="header-content">
-          <h1>Bem-vindo ao Restaurante</h1>
-        </div>
-        <div class="content">
-          <p>Servimos a melhor culinária da cidade!</p>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero__bg"></div>
+      <div class="hero__overlay"></div>
+      <img src="./img/restorante/floral.png" class="hero__flor-left" alt="" />
+      <img src="./img/restorante/floral-design-icon-flower-vines-and-leaves-right-border-icon-art-icon-p8R8NbfM-removebg-preview.png" class="hero__flor-right" alt="" />
+      <div class="hero__content">
+        <p class="hero__subtitle">Bem-vindo ao</p>
+        <h1 class="hero__title">Restorante</h1>
+        <p class="hero__desc">Tradição e sabor em cada prato. Uma experiência gastronômica inesquecível espera por você.</p>
+        <div class="hero__buttons">
+          <a href="cardapio.html" class="btn btn--primary">Ver Cardápio</a>
+          <a href="contato.html" class="btn btn--outline">Fazer Reserva</a>
         </div>
       </div>
+    </section>
 
-      <div class="galeria"></div>
-      <div class="overlay" id="overlay">
-        <div class="content">
-          <button class="close-btn" onclick="fecharOverlay()">X</button>
-          <img id="foto-grande" src="" alt="Foto Grande" />
-          <div class="painel" id="painel-info"></div>
+    <!-- DESTAQUES -->
+    <section class="section section--bege" id="destaques">
+      <div class="section__header reveal">
+        <span class="section__label">Por que nos escolher</span>
+        <h2 class="section__title">Uma Experiência Completa</h2>
+        <div class="section__divider"></div>
+      </div>
+      <div class="features">
+        <div class="feature reveal reveal-delay-1">
+          <div class="feature__icon">🌿</div>
+          <h3 class="feature__title">Ingredientes Frescos</h3>
+          <p class="feature__text">Selecionamos os melhores ingredientes frescos e de alta qualidade para cada prato que sai da nossa cozinha.</p>
+        </div>
+        <div class="feature reveal reveal-delay-2">
+          <div class="feature__icon">👨‍🍳</div>
+          <h3 class="feature__title">Chef Premiado</h3>
+          <p class="feature__text">Nossa equipe de chefs combina técnicas tradicionais com toques contemporâneos para criar sabores únicos.</p>
+        </div>
+        <div class="feature reveal reveal-delay-3">
+          <div class="feature__icon">✨</div>
+          <h3 class="feature__title">Ambiente Acolhedor</h3>
+          <p class="feature__text">Um espaço elegante e acolhedor, perfeito para jantares especiais, celebrações e momentos inesquecíveis.</p>
         </div>
       </div>
+    </section>
 
-      <div class="sobre-section">
-        <img
-          src="./img/restorante/images-removebg-preview.png"
-          alt="Imagem do Restaurante"
-          class="sobre-img"
-        />
-        <div class="sobre-text">
-          <h2>Sobre Nós</h2>
-          <p>
-            Saiba mais sobre nossa história e contato clicando no botão abaixo.
+    <!-- GALERIA / PRÉVIA CARDÁPIO -->
+    <section class="section" id="galeria">
+      <div class="section__header reveal">
+        <span class="section__label">Nossos Pratos</span>
+        <h2 class="section__title">Destaques do Cardápio</h2>
+        <div class="section__divider"></div>
+        <p class="section__desc">Conheça alguns dos nossos pratos mais queridos. Cada um é preparado com carinho e dedicação.</p>
+      </div>
+      <div class="gallery-grid" id="galleryGrid"></div>
+      <div class="text-center mt-3 reveal">
+        <a href="cardapio.html" class="btn btn--dark">Ver Cardápio Completo</a>
+      </div>
+    </section>
+
+    <!-- MODAL DETALHES -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <button class="modal__close" id="modalClose">✕</button>
+        <img class="modal__img" id="modalImg" src="" alt="" />
+        <div class="modal__info">
+          <span class="modal__category" id="modalCategory"></span>
+          <h2 class="modal__name" id="modalName"></h2>
+          <p class="modal__desc" id="modalDesc"></p>
+          <span class="modal__price" id="modalPrice"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOBRE PREVIEW -->
+    <section class="section section--bege" id="sobrePreview">
+      <div class="about-preview">
+        <div class="about-preview__img reveal">
+          <img src="./img/restorante/images-removebg-preview.png" alt="Restorante" />
+        </div>
+        <div class="about-preview__content reveal reveal-delay-1">
+          <span class="section__label">Sobre Nós</span>
+          <h2 class="section__title">Uma História de Paixão</h2>
+          <p class="about-preview__text">
+            Fundado em 2025, o Restorante nasceu da paixão pela culinária e do desejo de criar um espaço onde as pessoas pudessem se reunir para desfrutar de pratos cuidadosamente preparados. Cada prato é uma obra de arte, criada com os ingredientes mais frescos e de alta qualidade.
           </p>
-          <a href="sobre.html" class="btn-sobre">Saiba Mais</a>
+          <blockquote class="about-preview__quote">
+            "A melhor receita para a felicidade é compartilhar momentos deliciosos."
+          </blockquote>
+          <a href="sobre.html" class="btn btn--primary">Saiba Mais</a>
         </div>
       </div>
-    </main>
-    <footer>
-      <h4>&copy; 2025 Restorante. All rights reserved.</h4>
+    </section>
+
+    <!-- CTA CONTATO -->
+    <section class="section section--dark text-center" id="ctaContato">
+      <div class="reveal">
+        <span class="section__label">Reservas</span>
+        <h2 class="section__title" style="color: var(--branco);">Reserve Sua Mesa</h2>
+        <div class="section__divider"></div>
+        <p class="section__desc" style="margin-bottom: 2rem;">Pronto para uma experiência gastronômica inesquecível? Faça sua reserva agora mesmo.</p>
+        <a href="contato.html" class="btn btn--outline">Fale Conosco</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="./img/restorante/images-removebg-preview.png" alt="Restorante" />
+          <p>Tradição e sabor em cada prato. Uma experiência gastronômica quecelebra os melhores sabores da culinária brasileira.</p>
+          <div class="footer__social">
+            <a href="https://www.instagram.com/bruno_tg9/" target="_blank" aria-label="Instagram">
+              <img src="./img/restorante/instagram-svgrepo-com (1).png" alt="Instagram" />
+            </a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4>Contato</h4>
+          <p>📞 (79) 1234-5678</p>
+          <p>📱 WhatsApp: (79) 91234-5678</p>
+          <p>✉️ contato@restorante.com</p>
+        </div>
+        <div class="footer__col">
+          <h4>Horário</h4>
+          <p>Seg - Sex: 11h - 23h</p>
+          <p>Sábado: 11h - 00h</p>
+          <p>Domingo: 11h - 22h</p>
+        </div>
+        <div class="footer__col">
+          <h4>Links Rápidos</h4>
+          <a href="index.html">Home</a>
+          <a href="cardapio.html">Cardápio</a>
+          <a href="sobre.html">Sobre Nós</a>
+          <a href="contato.html">Contato</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2025 Restorante. Todos os direitos reservados.</p>
+      </div>
     </footer>
-    <script src="./index.js"></script>
+
+    <script src="index.js"></script>
   </body>
 </html>

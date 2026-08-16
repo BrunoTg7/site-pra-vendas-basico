@@ -1,390 +1,219 @@
-* {
-  margin: 0;
-  box-sizing: border-box;
+/* ============================================
+   PAGE HERO (HERO INTERNO)
+   ============================================ */
+.page-hero {
+  position: relative;
+  height: 45vh;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: var(--escuro);
+}
+
+.page-hero__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('./img/restorante/2513150_353917-PAXE6G-291__1_-removebg-preview\ \(1\).png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+}
+
+.page-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(61, 15, 16, 0.75) 0%,
+    rgba(26, 26, 26, 0.9) 100%
+  );
+}
+
+.page-hero__content {
+  position: relative;
+  z-index: 2;
+}
+
+.page-hero__title {
   font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  color: var(--branco);
+  line-height: 1.1;
 }
 
-html {
-  text-size-adjust: 100%;
+/* ============================================
+   HISTÓRIA
+   ============================================ */
+.about-story {
+  display: flex;
+  align-items: flex-start;
+  gap: 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: bisque;
-  width: auto;
-  overflow-x: hidden;
+.about-story__img {
+  flex: 0 0 45%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  position: relative;
 }
 
-header {
-  background-color: #373636;
-  color: white;
-  width: 100%;
-  height: 70px;
-  flex-direction: row-reverse;
-  position: fixed;
-  z-index: 500;
+.about-story__img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--dourado);
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-.logo {
-  float: left;
-  margin-top: -6px;
-  margin-left: 50px;
-  width: 80px;
-  height: 80px;
+.about-story__img:hover::after {
+  opacity: 0.5;
 }
 
-.logo a img {
-  color: white;
+.about-story__img img {
   width: 100%;
   height: 100%;
-}
-
-.instagram {
-  float: right;
-  margin-top: -2px;
-  margin-right: 50px;
-}
-
-.instagram a img {
-  color: white;
-  font-size: 1.5em;
-  width: 75px;
-  height: auto;
-}
-
-main {
-  display: flex;
-  flex-direction: row;
-  min-height: 500px;
-  position: relative;
-  padding-top: 7%;
-  padding-left: 4%;
-  padding-right: 4%;
-}
-
-h1,
-h2 {
-  color: #333;
-  margin-bottom: 10px;
-}
-
-h1 {
-  font-size: 2em;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px;
-}
-
-p {
-  color: #666;
-  margin-bottom: 20px;
-}
-
-.citacao-bonita {
-  font-style: italic;
-  color: #888;
-  border-left: 4px solid #ddd;
-  padding-left: 10px;
-  margin: 20px 0;
-}
-
-.btn-contato {
-  display: inline-block;
-  padding: 10px 20px;
-  margin: 10px 5px;
-  font-size: 1em;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-}
-
-.instagram-btn {
-  background-color: #e1306c;
-}
-
-.whatsapp-btn {
-  background-color: #25d366;
-}
-
-.contato {
-  text-align: center;
-  margin-top: 30px;
-}
-
-.contato h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-.contato p {
-  font-size: 1.2em;
-}
-
-.restaurante-img {
-  width: 500px;
-  height: auto;
-  overflow: hidden;
-  float: left;
-  margin-right: 20px;
-  margin-top: 30px;
-}
-
-.restaurante-img img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16/16;
+  min-height: 350px;
   object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 2s ease-in-out;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.conteudo {
-  display: flex;
-  flex-direction: column;
+.about-story__img:hover img {
+  transform: scale(1.05);
 }
 
-.card {
-  margin: 20px 0;
-  padding: 20px;
-  background-color: rgb(236, 232, 225);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+.about-story__content {
+  flex: 1;
 }
 
-.card:hover {
-  transform: translateY(-10px);
+.about-story__content p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 1.25rem;
+  line-height: 1.8;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+/* ============================================
+   VALORES
+   ============================================ */
+.values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.entrada {
-  background-color: #e4d89d;
-  width: 100%;
-  height: 700px;
-}
-
-.entrada .flor {
-  width: 10vw;
-  height: auto;
-  margin-left: 90vw;
-  margin-top: 3vh;
-  position: absolute;
-}
-
-.entrada .flor2 {
-  width: 10vw;
-  height: auto;
-  margin-left: 1vw;
-  margin-top: 76vh;
-  position: absolute;
-}
-
-.entrada .molde {
-  width: 40vw;
-  height: auto;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-}
-
-.entrada .logoEntrada {
-  width: 28vw;
-  height: auto;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-}
-
-footer {
-  background-color: #333;
-  color: white;
+.value-card {
   text-align: center;
-  padding: 10px 0;
-  margin-top: 10%;
+  padding: 2.5rem 1.5rem;
+  background: var(--branco);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition);
 }
 
-::-webkit-scrollbar {
-  width: 8px;
+.value-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
 }
 
-::-webkit-scrollbar-track {
-  background: #333;
-  border-radius: 0px;
+.value-card__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--borgonha), var(--borgonha-light));
+  border-radius: 50%;
+  font-size: 1.75rem;
 }
 
-::-webkit-scrollbar-thumb {
-  background: wheat;
-  border-radius: 5px;
+.value-card__title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--borgonha-dark);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: whitesmoke;
+.value-card__text {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.7;
 }
 
-::-webkit-scrollbar-button {
-  display: none;
+/* ============================================
+   CITAÇÃO
+   ============================================ */
+.quote-section {
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-/* Media Queries para responsividade */
-@media (max-width: 1200px) {
-  .entrada .flor {
-    width: 10vw;
-    margin-left: 90vw;
-    margin-top: 6vh;
-  }
+.quote-section__mark {
+  font-family: var(--font-display);
+  font-size: 6rem;
+  line-height: 1;
+  color: var(--dourado);
+  opacity: 0.5;
+  margin-bottom: -2rem;
+}
 
-  .entrada .flor2 {
-    width: 10vw;
-    margin-left: 1vw;
-    margin-top: 76vh;
-  }
+.quote-section__text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--bege);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
 
-  .entrada .molde {
-    width: 40vw;
-  }
+.quote-section__author {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--dourado);
+  letter-spacing: 0.1em;
+}
 
-  .entrada .logoEntrada {
-    width: 28vw;
-  }
-
-  .restaurante-img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .conteudo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-
-  main {
-    flex-direction: column;
-    padding-top: 80px;
-  }
-
-  .restaurante-img {
-    float: none;
-    margin: 0 auto 20px;
+/* ============================================
+   RESPONSIVE SOBRE
+   ============================================ */
+@media (max-width: 1024px) {
+  .about-story {
+    gap: 2.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  header {
-    height: 60px;
-  }
-
-  .logo {
-    width: 60px;
-    height: 60px;
-  }
-
-  .instagram a img {
-    width: 60px;
-  }
-
-  .entrada .flor {
-    width: 10vw;
-    margin-left: 90vw;
-    margin-top: 6vh;
-  }
-
-  .entrada .flor2 {
-    width: 10vw;
-    margin-left: 1vw;
-    margin-top: 88vh;
-  }
-
-  .entrada .molde {
-    width: 40vw;
-  }
-  .entrada .logoEntrada {
-    width: 28vw;
-  }
-
-  .restaurante-img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .conteudo {
-    display: flex;
+  .about-story {
     flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
+    gap: 2rem;
   }
 
-  main {
-    flex-direction: column;
-    padding-top: 80px;
-  }
-
-  .restaurante-img {
-    float: none;
-    margin: 0 auto 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  header {
-    height: 50px;
-  }
-
-  .logo {
-    width: 50px;
-    height: 50px;
-  }
-
-  .instagram a img {
-    width: 50px;
-  }
-
-  .entrada .flor {
-    width: 10vw;
-    margin-left: 90vw;
-    margin-top: 6vh;
-  }
-
-  .entrada .flor2 {
-    width: 10vw;
-    margin-left: 1vw;
-    margin-top: 88vh;
-  }
-
-  .entrada .molde {
-    width: 40vw;
-  }
-
-  .restaurante-img {
+  .about-story__img {
+    flex: none;
     width: 100%;
-    height: auto;
+  }
+
+  .about-story__img img {
+    min-height: 250px;
+    max-height: 350px;
+  }
+
+  .values {
+    grid-template-columns: 1fr;
+    max-width: 400px;
     margin: 0 auto;
-  }
-
-  .conteudo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-
-  main {
-    flex-direction: column;
-  }
-
-  .restaurante-img {
-    float: none;
-    margin: 0 auto 20px;
   }
 }

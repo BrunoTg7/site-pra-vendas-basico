@@ -3,104 +3,172 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sobre Nós</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
+    <meta name="theme-color" content="#5C1A1B" />
+    <meta name="author" content="Restorante" />
+    <title>Sobre Nós — Restorante</title>
+    <meta name="description" content="Conheça a história do Restorante. Fundado em 2025, tradição, paixão e sabor em cada prato preparado com amor." />
+    <meta name="keywords" content="sobre, história, restaurante, tradição, paixão, culinária, equipe" />
+    <meta property="og:title" content="Sobre Nós — Restorante" />
+    <meta property="og:description" content="Conheça a história do Restorante. Tradição, paixão e sabor desde 2025." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./img/restorante/images-removebg-preview.png" />
+    <link rel="icon" type="image/png" href="./img/restorante/images-removebg-preview.png" />
+    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="sobreStyle.css" />
   </head>
   <body>
-    <header style="display: none">
-      <div class="logo">
-        <a href="/">
-          <img src="./img/restorante/images-removebg-preview.png" alt="" />
+
+    <!-- HEADER -->
+    <header class="header scrolled" id="header">
+      <div class="header__logo">
+        <a href="index.html">
+          <img src="./img/restorante/images-removebg-preview.png" alt="Restorante" />
         </a>
       </div>
-      <div class="instagram">
-        <a href="https://www.instagram.com/bruno_tg9/">
+      <nav class="header__nav" id="nav">
+        <a href="index.html">Home</a>
+        <a href="cardapio.html">Cardápio</a>
+        <a href="sobre.html" class="active">Sobre</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+      <div class="header__social">
+        <a href="https://www.instagram.com/bruno_tg9/" target="_blank" class="instagram-btn">
           <img src="./img/restorante/instagram-svgrepo-com (1).png" alt="" />
+          <span>Instagram</span>
         </a>
       </div>
+      <button class="header__menu-toggle" id="menuToggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </header>
 
-    <div class="entrada" style="display: flex">
-      <img
-        src="./img/restorante/floral-design-icon-flower-vines-and-leaves-right-border-icon-art-icon-p8R8NbfM-removebg-preview.png"
-        class="flor"
-        alt=""
-      />
-      <img src="./img/restorante/floral.png" class="flor2" alt="" />
-      <img
-        src="./img/restorante/2513150_353917-PAXE6G-291__1_-removebg-preview (1).png"
-        class="molde"
-        alt=""
-      />
-      <img
-        class="logoEntrada"
-        src="./img/restorante/images-removebg-preview.png"
-        alt=""
-      />
-    </div>
-    <main style="display: none">
-      <div class="restaurante-img">
-        <img
-          src="./img/restorante/restaurante-mez256.jpg"
-          alt="Foto do Restaurante"
-        />
+    <!-- HERO INTERNO -->
+    <section class="page-hero">
+      <div class="page-hero__bg"></div>
+      <div class="page-hero__overlay"></div>
+      <div class="page-hero__content">
+        <span class="section__label">Conheça nossa história</span>
+        <h1 class="page-hero__title">Sobre Nós</h1>
+        <div class="section__divider"></div>
       </div>
-      <div class="conteudo">
-        <section class="card">
-          <h1>Sobre Nós</h1>
+    </section>
+
+    <!-- HISTÓRIA -->
+    <section class="section">
+      <div class="about-story">
+        <div class="about-story__img reveal">
+          <img src="./img/restorante/restaurante-mez256.jpg" alt="Restaurante" />
+        </div>
+        <div class="about-story__content reveal reveal-delay-1">
+          <span class="section__label">Nossa História</span>
+          <h2 class="section__title" style="text-align: left;">Uma Paixão que Começou em 2025</h2>
+          <div class="section__divider" style="margin: 1.25rem 0;"></div>
           <p>
-            Bem-vindo ao Restorante, onde tradição e sabor se encontram em
-            perfeita harmonia. Nossa missão é proporcionar a melhor experiência
-            gastronômica, celebrando a culinária clássica com um toque
-            contemporâneo.
+            Fundado em 2025, o Restorante nasceu da paixão pela culinária e do desejo de criar um espaço onde as pessoas pudessem se reunir para desfrutar de pratos cuidadosamente preparados.
           </p>
           <p>
-            Desfrute de um ambiente acolhedor e elegante, ideal para momentos
-            especiais com amigos e familiares. Nossa equipe dedicada está aqui
-            para garantir que cada refeição seja inesquecível.
-          </p>
-          <blockquote class="citacao-bonita">
-            <p>
-              "A melhor receita para a felicidade é compartilhar momentos
-              deliciosos."
-            </p>
-          </blockquote>
-        </section>
-        <section class="card">
-          <h2>Nossa História</h2>
-          <p>
-            Fundado em 2025, o Restorante nasceu da paixão pela culinária e do
-            desejo de criar um espaço onde as pessoas pudessem se reunir para
-            desfrutar de pratos cuidadosamente preparados.
+            Cada prato é uma obra de arte, criada com os ingredientes mais frescos e de alta qualidade, garantindo um sabor inigualável. Nossa equipe dedicada trabalha com amor e dedicação para que cada refeição seja uma experiência memorável.
           </p>
           <p>
-            Cada prato é uma obra de arte, criada com os ingredientes mais
-            frescos e de alta qualidade, garantindo um sabor inigualável.
+            Acreditamos que a comida tem o poder de unir pessoas, criar memórias e transformar momentos simples em algo especial. É essa filosofia que guia cada decisão que tomamos, desde a seleção dos ingredientes até a apresentação final do prato.
           </p>
-        </section>
-        <section class="card contato">
-          <h2>Contato</h2>
-          <a
-            href="https://www.instagram.com/bruno_tg9/"
-            class="btn-contato instagram-btn"
-            >Instagram</a
-          >
-          <a href="https://wa.me/1234567890" class="btn-contato whatsapp-btn"
-            >WhatsApp</a
-          >
-          <p>Telefone: (79) 1234-5678</p>
-        </section>
+        </div>
       </div>
-    </main>
-    <footer style="display: none">
-      <p>&copy; 2025 Restorante. All rights reserved.</p>
+    </section>
+
+    <!-- VALORES -->
+    <section class="section section--bege">
+      <div class="section__header reveal">
+        <span class="section__label">O que nos guia</span>
+        <h2 class="section__title">Nossos Valores</h2>
+        <div class="section__divider"></div>
+      </div>
+      <div class="values">
+        <div class="value-card reveal reveal-delay-1">
+          <div class="value-card__icon">🌾</div>
+          <h3 class="value-card__title">Qualidade</h3>
+          <p class="value-card__text">
+            Selecionamos apenas os melhores ingredientes, priorizando produtores locais e fornecedores comprometidos com a excelência e a frescura.
+          </p>
+        </div>
+        <div class="value-card reveal reveal-delay-2">
+          <div class="value-card__icon">📖</div>
+          <h3 class="value-card__title">Tradição</h3>
+          <p class="value-card__text">
+            Honramos as receitas tradicionais da culinária brasileira, preservando sabores que passam de geração em geração com um toque contemporâneo.
+          </p>
+        </div>
+        <div class="value-card reveal reveal-delay-3">
+          <div class="value-card__icon">🤝</div>
+          <h3 class="value-card__title">Hospitalidade</h3>
+          <p class="value-card__text">
+            Cada cliente é recebido como em casa. Acreditamos que ahospitalidade genuína é a ingrediente secreto de uma experiência gastronômica completa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CITAÇÃO -->
+    <section class="section section--dark text-center">
+      <div class="quote-section reveal">
+        <div class="quote-section__mark">"</div>
+        <blockquote class="quote-section__text">
+          A melhor receita para a felicidade é compartilhar momentos deliciosos com quem você ama.
+        </blockquote>
+        <div class="quote-section__author">— Equipe Restorante</div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section text-center">
+      <div class="reveal">
+        <span class="section__label">Venha nos visitar</span>
+        <h2 class="section__title">Conheça nosso restaurante</h2>
+        <div class="section__divider"></div>
+        <p class="section__desc" style="margin-bottom: 2rem;">Estamos prontos para recebê-lo com braços abertos e pratos deliciosos.</p>
+        <a href="contato.html" class="btn btn--primary">Fale Conosco</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="./img/restorante/images-removebg-preview.png" alt="Restorante" />
+          <p>Tradição e sabor em cada prato. Uma experiência gastronômica quecelebra os melhores sabores da culinária brasileira.</p>
+          <div class="footer__social">
+            <a href="https://www.instagram.com/bruno_tg9/" target="_blank" aria-label="Instagram">
+              <img src="./img/restorante/instagram-svgrepo-com (1).png" alt="Instagram" />
+            </a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4>Contato</h4>
+          <p>📞 (79) 1234-5678</p>
+          <p>📱 WhatsApp: (79) 91234-5678</p>
+          <p>✉️ contato@restorante.com</p>
+        </div>
+        <div class="footer__col">
+          <h4>Horário</h4>
+          <p>Seg - Sex: 11h - 23h</p>
+          <p>Sábado: 11h - 00h</p>
+          <p>Domingo: 11h - 22h</p>
+        </div>
+        <div class="footer__col">
+          <h4>Links Rápidos</h4>
+          <a href="index.html">Home</a>
+          <a href="cardapio.html">Cardápio</a>
+          <a href="sobre.html">Sobre Nós</a>
+          <a href="contato.html">Contato</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2025 Restorante. Todos os direitos reservados.</p>
+      </div>
     </footer>
 
-    <script src="./sobrejs.js"></script>
+    <script src="sobrejs.js"></script>
   </body>
 </html>
